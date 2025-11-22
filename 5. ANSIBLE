@@ -14,7 +14,7 @@ configuration: cpu, memory, and os
 management: update, delete, install ----
 
 Ansible was invented by Michael deHaan in 2012.
-Ansible is taken by Red Hat
+Red Hat owns Ansible
 We have both free and paid versions of Ansible.
 It is platform independent.
 Ansible works with the YAML language.
@@ -25,9 +25,9 @@ HOW DOES IT WORK?
 ARCHITECTURE:
 
 ANSIBLE SERVER: used to communicate with worker nodes and install pkgs, deployment
-WORKER NODES: take commands from the Ansible server and work according to it
-PLAYBOOK: conatins the code which is used to perform action.
-INVENTORY: conatains info about worker nodes and group.
+WORKER NODES: take commands from the Ansible server and work according to them
+PLAYBOOK: contains the code that is used to act.
+INVENTORY: contains info about worker nodes and groups.
 
 
 
@@ -44,6 +44,14 @@ vim /etc/ssh/sshd_config  (38 uncomment, 63 no=yes)
 systemctl restart sshd
 systemctl status sshd
 
+------------------------------------
+Add this line
+PermitRootLogin yes
+PasswordAuthentication yes
+
+Comment this line
+#PermitRootLogin prohibit-password
+------------------------------------
 
 ANSIBLE SERVER:
 amazon-linux-extras install ansible2 -y
@@ -144,13 +152,15 @@ ansible all -m user -a "name=rajinikanth state=absent"
 ansible all -m copy -a "src=app.yml dest=/root"
 ansible all -a "ls /root"
 
+app.yml (it is the text file that contains the properties of the application)
+
 PLAYBOOKS:
-playbook is a collection of modules.
+Playbook is a collection of modules.
 We can execute multiple modules simultaneously.
 We can reuse the playbook.
-playbook will be written in YAML.
+Playbook will be written in YAML.
 YAML: YET ANOTHER MARKUP LANGUAGE
-it's a human-readable and serial language.
+It's a human-readable and serial language.
 YAML is syntax-based.
 YAML starts with --- and ends with ...
 We write it in list format.
@@ -296,8 +306,8 @@ ansible-playbook raham.yml
 
 VARS:
 
-STATIC VARS: vars which will define inside playbook.
-DYNAMIC VARS: vars which are not define inside playbook.
+STATIC VARS: vars that will be defined inside the playbook.
+DYNAMIC VARS: vars that are not defined inside the playbook.
 
 - hosts: all
   vars:
@@ -311,7 +321,7 @@ DYNAMIC VARS: vars which are not define inside playbook.
     - name: install maven
       yum: name={{b}} state=present
 
-    - name: install docker
+    - name: install Docker
       yum: name={{c}} state=present
 
 
@@ -329,7 +339,7 @@ ansible-playbook raham.yml
     - name: install maven
       yum: name={{b}} state=absent
 
-    - name: install docker
+    - name: install Docker
       yum: name={{c}} state=absent
 
 ansible-playbook raham.yml
@@ -347,7 +357,7 @@ ansible-playbook raham.yml
     - name: install maven
       yum: name={{b}} state=present
 
-    - name: install docker
+    - name: install Docker
       yum: name={{c}} state=present
 
     - name: install pkg
@@ -369,7 +379,7 @@ ansible all -a "yum remove git* maven* docker* tree* -y"
     - name: install maven
       yum: name={{b}} state=present
 
-    - name: install docker
+    - name: install Docker
       yum: name={{c}} state=present
 
     - name: install {{d}}
@@ -417,8 +427,24 @@ LOOPS:
 
 
 TROUBLESHOOTING:
+
+interview question:
+
+to show the configuration of nodes
 ansible all -m setup | grep -i cpus
 ansible all -m setup | grep -i mem
+
+to show how many worker nodes are connected to the main node
+
+cd .ssh
+ll
+cat known_hosts
+
+
+ansible all --list-host
+
+This is a list of all node from the inventory file which are connected or not.
+
 
 HISTORY:
  87  vim raham.yml
