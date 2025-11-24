@@ -1,19 +1,19 @@
 06-09-2023
 
 JENKINS:
-its a ci/cd tool.
+It's a CI/CD tool.
 
-ci : continous integration : continous build + continous test 
+ci : continuous integration : continuous build + continuous test 
 old code with new code
-before ci we have time waste and every thing is manual work.
-after ci everything is automated.
+before CI, we waste time and everything is manual work.
+After CI, everything is automated.
 
-cd : continous delivery	  : deployment manually to prod env
-cd : continous deployment : deployment automatically to prod env
+cd : continuous delivery	  : deployment manually to prod env
+cd : continuous deployment : deployment automatically to prod env
 
 PIPELINE:
 STEP BY STEP EXECUTION OF A PARTICULAR PROCESS.
-SERIES OF EVENTS INTERLINKED WITH EACHOTHER.
+SERIES OF EVENTS INTERLINKED WITH EACH OTHER.
 
 CODE -- > BUILD -- > TEST -- >  DEPLOY
 
@@ -25,17 +25,17 @@ UAT	: CLIENT
 THE ABOVE ENVS ARE CALLED AS PRE-PROD OR NON-PROD
 
 PROD	: USER
-PROD ENV IS ALSO CALLED AS LIVE ENV
+PROD ENV IS ALSO CALLED LIVE ENV
 
 
 JENKINS:
-its a free and opensource tool.
-its platform independent.
-it is built on java-11.
-koshuke kawaguchui invented jenkins in sun micro systems 2004.
+It's a free and open-source tool.
+It's platform independent.
+It is built on Java 11.
+Koshuke Kawaguchi invented Jenkins at Sun Microsystems in 2004.
 inital name was hudson -- > paid -- > orcle -- > free 
 it consist lot of plugins.
-port number for jenkins is 8080.
+Port number for Jenkins is 8080.
 
 SETUP: CREATE EC2 WITH ALL TRAFFIC (8080)
 
@@ -51,14 +51,14 @@ amazon-linux-extras install java-openjdk11 -y
 yum install jenkins -y
 update-alternatives --config java
 
-#STEP-4: RESTARTING JENKINS (when we download service it will on stopped state)
+#STEP-4: RESTARTING JENKINS (when we download the service, it will be in a stopped state)
 systemctl start jenkins.service
 systemctl status jenkins.service
 
-copy public ip and paste on browser like this
+Copy the public IP and paste it into the browser like this
 public-ip:8080
 cat /var/lib/jenkins/secrets/initialAdminPassword
-install plugins and create user for login.
+Install plugins and create a user for login.
 
 INTEGRATION OF GIT AND MAVEN WITH JENKINS:
 NEW ITEM -- > NAME: NETFLIX JOB -- > FREE STYLE -- > OK 
