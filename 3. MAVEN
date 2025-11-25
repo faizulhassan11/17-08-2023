@@ -1,22 +1,22 @@
 DATE: 05-09-2023
 MAVEN:
-its a build too1.
-main file is POM.XML (project object model & Extensible markup language)
-POM.XML will have entire information of project.
-it is used to create artifact (war, jar, ear)
-It is mostly used for java-based projects.
+It's a build tool.
+Main file is POM.XML (project object model & Extensible markup language)
+POM.XML will have all entire information about the project.
+It is used to create an artifact (war, jar, ear)
+It is mostly used for Java-based projects.
 It was initially released on 13 July 2004.
-Maven is written in java (1.8.0)
+Maven is written in Java (1.8.0)
 
-RAW: .java  (we cant use it)
+RAW: .java  (we can't use it)
 .java -- > compile -- > .class -- > .jar -- > package -- > .war
 
 .class 	: which can be executable
 .jar    : group of .class files (works for backend)
 .war	: it has frontend and backend code (FE: HTML, CSS, JS & BE: JAVA)
-libs	: its a pre defined packages used for code.
+libs	: its a pre defined package used for code.
 
-ARTIFACTS: its the final product.
+ARTIFACTS: It's the final product.
 JAR = JAVA ARCHIVE
 WAR = WEB ARCHIVE 
 EAR = ENTERPRISE ARCHIVE
@@ -28,10 +28,14 @@ yum install git java-1.8.0-openjdk maven tree -y
 git clone https://github.com/devopsbyraham/jenkins-java-project.git
 cd jenkins-java-project.git
 
-PLUGIN: its a small software which automates our work.
-with the plugins we can use tools without installing them.
+====================================================
+sudo dnf install java-1.8.0-amazon-corretto-devel -y
+=====================================================
 
-GOAL: its a command used to perfrom task.
+PLUGIN: It's a small software that automates our work.
+with the plugins, we can use tools without installing them.
+
+GOAL: It's a command used to perform a task.
 MAVEN follows a lifecycle
 
 mvn compile	: to compile the source code
@@ -45,7 +49,7 @@ mvn clean	: to delete target
 maven			ant
 pom.xml			build.xml
 life cycle		no life cycle
-procedural		declareative
+procedural		declarative
 plugins			no plugins
 no scripts 		scripts
 
