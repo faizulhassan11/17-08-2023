@@ -1,3 +1,17 @@
+KUBERNETES:
+It is an open-source platform for container orchestration.
+It is used to automate many manual processes, like deploying, managing, and scaling containerised applications.
+Kubernetes was developed by Google using the Go language.
+Google donated k8s to CNCF in 2014.
+1st version was released in 2015.
+
+Why Kubernetes:
+Containers are a good and easy way to bundle and run your applications. In a production environment, you need to manage the
+containers that run the applications and ensure that there is no downtime. 
+In Docker, we used Docker Swarm for this. But any Docker has drawbacks!
+
+
+
 DOCKER SWARM:
 CLUSTER 
 NODES
@@ -10,70 +24,77 @@ P: POD
 C: CONTAINER
 A: APPLICATION
 
-NOTE: k8s dont communicate with containers.
-it communicate with pods.
+NOTE: k8s doesn't communicate with containers.
+It communicates with pods.
+
+CLUSTER:
+It is a group of servers; it will have both manager and worker nodes.
+The master node is used to assign tasks to worker nodes.
+The worker node will perform the task.
+We have 4 components in the master node.
 
 COMPONENTS:
 MASTER NODE:
-1. API SERVER: its for communicating with cluster, it takes command executes and gives output.
-2. ETCD: its a DB od cluster, all the cluster info will store here.
+1. API SERVER: It's for communicating with the cluster, it takes commands, executes and gives output.
+2. ETCD: it's a DB of a cluster, and all the cluster info will be stored here.
 3. SCHEDULER: schedules pods on worker nodes, based on hardware resources.
 4. CONTROLLER: used to control the k8s objects.
 1. cloud controllers
 2. kube controllers
 
 WORKER NODE:
-KUBELET: its an agent used to communicate with master.
+KUBELET: It's an agent used to communicate with the master.
 KUBEPROXY: it deals with nlw.
-POD: its a group of containers.
+POD: it's a group of containers.
+Container: 
 
 
-There are multiple ways to setup kubernetes cluster.
+There are multiple ways to set up a Kubernetes cluster.
 
-1.SELF MANAGER K8'S CLUSTER
+1. SELF MANAGER K8'S CLUSTER
 a.mini kube (single node cluster)
 b.kubeadm(multi node cluster)
 c. KOPS
 
-2. CLOUD MANAGED K8'S CLUSTER
+2. CLOUD MANAGED K8S CLUSTER
 a. AWS EKS
 b.AZURE AKS
 c.GCP GKS
 d.IBM IKE
 
 MINIKUBE:
-It is a tool used to setup single node cluster on K8's. 
-It contains API Servers, ETDC database and container runtime
-It is used for development, testing, and experimentation purposes on local. 
-Here Master and worker runs on same machine.
-It is a platform Independent.
+It is a tool used to set up a single-node cluster on K8S. 
+It contains API Servers, the ETDC database and the container runtime
+It is used for development, testing, and experimentation purposes locally. 
+Here, the Master and worker run on the same machine.
+It is a platform-independent.
 
-NOTE: But we dont implement this in real-time
+NOTE: But we don't implement this in real-time
 
 REQUIRMENTS:
 2 CPUs or more
 2GB of free memory
 20GB of free disk space
 Internet connection
-Container or virtual machine manager, such as: Docker.
+Container or virtual machine manager, such as Docker.
 
 
 
 PODS:
-It is a smallest unit of deployment in K8's.
+It is the smallest unit of deployment in K8S.
 It is a group of containers.
-Pods are ephemeral (short living objects)
-Mostly we can use single container inside a pod but if we required, we can create multiple containers inside a same pod.
-when we create a pod, containers inside pods can share the same network namespace, and can share the same storage volumes .
-While creating pod, we must specify the image, along with any necessary configuration and resource limits.
-K8's cannot communicate with containers, they can communicate with only pods.
+Pods are ephemeral (short-lived objects)
+Mostly, we can use a single container inside a pod, but if we require, we can create multiple containers inside the same pod.
+when we create a pod, containers inside pods can share the same network namespace and can share the same storage volumes.
+While creating a pod, we must specify the image, along with any necessary configuration and resource limits.
+K8's cannot communicate with containers; they can communicate with only pods.
  We can create this pod in two ways, 
 1. Imperative(command) 
 2. Declarative (Manifest file)
 
 
 IMPERATIVE: 
-kubectl run pod1 --image rahamshaik/paytmtrain:latest
+kubectl run pod1 --image rahamshaik/paytmtrain: latest
 kubectl get po/pod/pods
 kubectl get po/pod/pods -o wide
 kubectl describe pod pod1
@@ -98,18 +119,18 @@ kubectl describe pod pod1
 kubectl delete pod pod1
 
 DRAWBACK:
-if we delete the pod we cant retrive.
-all the load will be handled by single pod.
+if we delete the pod, we cant retrive.
+All the load will be handled by a single pod.
 
 
 REPLICA SET:
-it will create same pod of multiple replicas.
-if we delete one pod it will create automatically.
-we can distribute the load also.
+it will create the same pod of multiple replicas.
+If we delete one pod, it will be created automatically.
+We can distribute the load also.
 
 
-LABLE: assing to a pod for identification. to work with them as single unit.
-SELECTOR: used to identify the pod with same label.
+LABEL: assigning to a pod for identification. to work with them as a single unit.
+SELECTOR: used to identify the pod with the same label.
 
 kubectl api-resources
 
@@ -155,12 +176,12 @@ kubectl scale rs/swiggy-rs --replicas=5
 
 SCALING FOLLOWS LIFO PATTERN:
 LIFO: LAST IN FIRST OUT
-the pod which is created will be deleted first automatically when we scale out.
+The pod which is created will be deleted first automatically when we scale out.
 
 
 DEPLOYMENT:
-it will do all operations link RS.
-it will do roll back which cannot be done in rs.
+It will do all operations linked to RS.
+It will do a rollback back which cannot be done in RS.
 
 rs -- > pods
 deployment -- > rs -- > pods
@@ -291,14 +312,14 @@ HISTORY:
    86  history
 root@ip-172-31-10-159:~#
 
-There are multiple ways to setup kubernetes cluster.
+There are multiple ways to set up a Kubernetes cluster.
 
-1.SELF MANAGER K8'S CLUSTER
+1. SELF MANAGER K8'S CLUSTER
 a.mini kube (single node cluster)
 b.kubeadm(multi node cluster)
 c. KOPS
 
-2. CLOUD MANAGED K8'S CLUSTER
+2. CLOUD MANAGED K8S CLUSTER
 a. AWS EKS
 b.AZURE AKS
 c.GCP GKS
@@ -306,19 +327,19 @@ d.IBM IKE
 
 MINIKUBE:
 It is a tool used to setup single node cluster on K8's. 
-It contains API Servers, ETDC database and container runtime
-It is used for development, testing, and experimentation purposes on local. 
-Here Master and worker runs on same machine.
-It is a platform Independent.
+It contains API Servers, the ETDC database and the container runtime
+It is used for development, testing, and experimentation purposes locally. 
+Here Master and worker run on the same machine.
+It is a platform-independent.
 
-NOTE: But we dont implement this in real-time
+NOTE: But we don't implement this in real-time
 
 REQUIRMENTS:
 2 CPUs or more
 2GB of free memory
 20GB of free disk space
 Internet connection
-Container or virtual machine manager, such as: Docker.
+Container or virtual machine manager, such as Docker.
 
 SETUP:
 sudo apt update -y
@@ -337,20 +358,20 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 sudo minikube start --driver=docker --force
 
 PODS:
-It is a smallest unit of deployment in K8's.
+It is the smallest unit of deployment in K8s.
 It is a group of containers.
-Pods are ephemeral (short living objects)
-Mostly we can use single container inside a pod but if we required, we can create multiple containers inside a same pod.
-when we create a pod, containers inside pods can share the same network namespace, and can share the same storage volumes .
-While creating pod, we must specify the image, along with any necessary configuration and resource limits.
-K8's cannot communicate with containers, they can communicate with only pods.
+Pods are ephemeral (short-lived objects)
+Mostly we can use sa ingle container inside a pod, but if we require, we can create multiple containers inside the same pod.
+when we create a pod, containers inside pods can share the same network namespace and can share the same storage volumes.
+While creating a pod, we must specify the image, along with any necessary configuration and resource limits.
+K8's cannot communicate with containers; they can communicate with only pods.
  We can create this pod in two ways, 
 1. Imperative(command) 
 2. Declarative (Manifest file)
 
 
 IMPERATIVE: 
-kubectl run pod1 --image rahamshaik/paytmtrain:latest
+kubectl run pod1 --image rahamshaik/paytmtrain: latest
 kubectl get po/pod/pods
 kubectl get po/pod/pods -o wide
 kubectl describe pod pod1
@@ -423,17 +444,17 @@ HISTORY:
    46  history
 ===========================================================
 KOPS:
-INFRASTRUCTURE: Resources used to run our application on cloud.
+INFRASTRUCTURE: Resources used to run our application on the cloud.
 EX: Ec2, VPC, ALB, -------------
 
 
 Minikube -- > single node cluster
-All the pods on single node 
+All the pods on a single node 
 kOps, also known as Kubernetes operations.
-it is an open-source tool that helps you create, destroy, upgrade, and maintain a highly available, production-grade Kubernetes cluster. 
+It is an open-source tool that helps you create, destroy, upgrade, and maintain a highly available, production-grade Kubernetes cluster. 
 Depending on the requirement, kOps can also provide cloud infrastructure.
-kOps is mostly used in deploying AWS and GCE Kubernetes clusters. 
-But officially, the tool only supports AWS. Support for other cloud providers (such as DigitalOcean, GCP, and OpenStack) are in the beta stage.
+kOps is mostly used for deploying AWS and GCE Kubernetes clusters. 
+But officially, the tool only supports AWS. Support for other cloud providers (such as DigitalOcean, GCP, and OpenStack) is in the beta stage.
 
 
 ADVANTAGES:
@@ -444,10 +465,10 @@ ADVANTAGES:
 •	Generates Terraform and CloudFormation configurations
 •	Manages cluster add-ons.
 •	Supports state-sync model for dry-runs and automatic idempotency
-•	Creates instance groups to support heterogeneous clusters
+•	Creates instances and groups to support heterogeneous clusters
 
 ALTERNATIVES:
-Amazon EKS , MINIKUBE, KUBEADM, RANCHER, TERRAFORM.
+Amazon EKS, MINIKUBE, KUBEADM, RANCHER, TERRAFORM.
 
 
 STEP-1: GIVING PERMISSIONS
@@ -544,37 +565,37 @@ HISTORY:
 NAMESPACES:
 
 NAMESPACE: It is used to divide the cluster to multiple teams on real time.
-it is used to isolate the env.
+It is used to isolate the environment.
 
 CLUSTER: HOUSE
 NAMESPACES: ROOM
 
 Each namespace is isolated.
-if your are room-1 are you able to see room-2.
+if you're in room-1 are you able to see room-2.
 we cant access the objects from one namespace to another namespace.
 
 
 TYPES:
 
-default           : Is the default namespace, all objects will create here only
-kube-node-lease   : it will store object which is taken from one namespace to another.
-kube-public	  : all the public objects will store here.      
-kube-system 	  : default k8s will create some objects, those are storing on this ns.
+default          : Is the default namespace; all objects will be created here. Only
+kube-node-lease : it will store objects which are taken from one namespace to another.
+kube-public: all the public objects will store here.      
+kube-system: default k8s will create some objects, which are stored in this namespace.
 
-kubectl get pod -n kube-system	: to list all pods in kube-system namespace
-kubectl get pod -n default	: to list all pods in default namespace
-kubectl get pod -n kube-public	: to list all pods in kube-public namespace
+kubectl get pod -n kube-system	: to list all pods in the kube-system namespace
+kubectl get pod -n default	: to list all pods in the default namespace
+kubectl get pod -n kube-public	: to list all pods in the kube-public namespace
 kubectl get po -A		: to list all pods in all namespaces
 
-kubectl create ns dev	: to create namespace
+kubectl create ns dev	: to create a namespace
 kubectl config set-context --current --namespace=dev : to switch to the namespace
-kubectl config view --minify | grep namespace : to see current namespace
+kubectl config view --minify | grep namespace: to see current namespace
 kubectl delete ns dev	: to delete namespace
 kubectl delete pod --all: to delete all pods
 
 
-NOTE: By deleting  the ns all objects also gets deleted.
-in real time we use rbac concept to restrict the access from one namespace to another.
+NOTE: By deleting  the ns, all objects also get deleted.
+In real time, we use rbac concept to restrict access from one namespace to another.
 so users cant access/delete ns, because of the restriction we provide.
 we create roles and rolebind for the users.
 
@@ -583,7 +604,7 @@ SERVICE: It is used to expose the application in k8s.
 
 TYPES:
 1. CLUSTERIP: It will work inside the cluster.
-it will not expose to outer world.
+It will not be exposed to the outer world.
 
 apiVersion: apps/v1
 kind: Deployment
@@ -663,7 +684,7 @@ NOTE: UPDATE THE SG (REMOVE OLD TRAFFIC AND GIVE ALL TRAFFIC & SSH)
 DRAWBACK:
 PORT RESTRICTION.
 
-3. LOADBALACER: It will expose our app and distribute load blw pods.
+3. LOADBALANCER: It will expose our app and distribute load across pods.
 
 apiVersion: apps/v1
 kind: Deployment
