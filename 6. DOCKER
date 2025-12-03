@@ -1,82 +1,13 @@
 MONOLITHIC: SINGLE APP -- > SINGLE SERVER -- > SINGLE DATABASE
 MICRO SERVICES: SINGLE APP -- > MULTIPLE SERVERS -- > MULTIPLE DATABASES
 
-
- Monolithic Architecture:
-```
-┌─────────────────────────────────────┐
-│           SINGLE APPLICATION         │
-│  (User Auth + Orders + Payments +   │
-│   Inventory + Shipping + Analytics)  │
-├─────────────────────────────────────┤
-│           SINGLE SERVER              │
-│         (e.g., one big machine)      │
-├─────────────────────────────────────┤
-│           SINGLE DATABASE            │
-│       (one MySQL/PostgreSQL DB)      │
-└─────────────────────────────────────┘
-```
-
- Microservices Architecture:
-```
-┌─────────────────────────────────────┐
-│         SINGLE APP/FRONTEND         │
-└─────────────────────────────────────┘
-           │         │         │
-     ┌─────┴─────┐ ┌─┴─────┐ ┌─┴─────┐
-     │ Auth      │ │Orders │ │Payment│
-     │ Service   │ │Service│ │Service│
-     └─────┬─────┘ └─┬─────┘ └─┬─────┘
-     ┌─────┴─────┐ ┌─┴─────┐ ┌─┴─────┐
-     │ Auth DB   │ │Orders │ │Payment│
-     │           │ │ DB    │ │ DB    │
-     └───────────┘ └───────┘ └───────┘
+MICRO:
+COST WILL BE HIGH
+MAINTAINANCE
 
 
- Cost:
-- Microservices: Initially HIGHER due to multiple servers, but can be optimised with containers
-- Monolithic: Initially LOWER, but scaling can get expensive
-
- Maintenance:
-- Microservices: Complex (monitoring, deployment, inter-service communication)
-- Monolithic: Simpler initially, becomes complex as the app grows
-
- Limitations of Monolithic - Expanded:
-
-1. SERVER PERFORMANCE ✓
-   - Single point of failure
-   - Cannot scale individual components
-
-2. SCALING ISSUES
-   - Must scale entire app even if only one feature is popular
-   - Can't optimise resources per service
-
-3. TECHNOLOGY LOCK-IN
-   - Entire app uses the same tech stack
-   - Hard to adopt new technologies gradually
-
-4. SLOW DEVELOPMENT
-   - Large codebase = longer build/test times
-   - One bug can bring down the entire application
-
-5. DEPLOYMENT CHALLENGES
-   - Small change requires redeploying the entire application
-   - Riskier deployments
-
- Microservices Challenges:
-- Network complexity (services talking to each other)
-- Data consistency (distributed transactions)
-- Debugging difficulty (multiple services, multiple logs)
-- Operational overhead (requires DevOps expertise)
-
- Modern Approach:
-Containers (Docker) help solve microservices challenges:
-- Each service in its own container
-- Easier deployment and scaling
-- Consistent environments
-- Resource isolation
-
-
+LIMITATIONS OF MONOLITHIC:
+1. SERVER PERFORMANCE
 
 CONTAINERS:
 SERVER = CONTAINER
