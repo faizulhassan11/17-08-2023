@@ -1,0 +1,277 @@
+MONOLITHIC: SINGLE APP -- > SINGLE SERVER -- > SINGLE DATABASE
+MICRO SERVICES: SINGLE APP -- > MULTIPLE SERVERS -- > MULTIPLE DATABASES
+
+
+ Cost:
+- Microservices: Initially HIGHER due to multiple servers, but can be optimised with containers
+- Monolithic: Initially LOWER, but scaling can get expensive
+
+ Maintenance:
+- Microservices: Complex (monitoring, deployment, inter-service communication)
+- Monolithic: Simpler initially, becomes complex as the app grows
+
+ Limitations of Monolithic - Expanded:
+
+1. SERVER PERFORMANCE ✓
+   - Single point of failure
+   - Cannot scale individual components
+
+2. SCALING ISSUES
+   - Must scale entire app even if only one feature is popular
+   - Can't optimise resources per service
+
+3. TECHNOLOGY LOCK-IN
+   - Entire app uses the same tech stack
+   - Hard to adopt new technologies gradually
+
+4. SLOW DEVELOPMENT
+   - Large codebase = longer build/test times
+   - One bug can bring down the entire application
+
+5. DEPLOYMENT CHALLENGES
+   - Small change requires redeploying the entire application
+   - Riskier deployments
+
+ Microservices Challenges:
+- Network complexity (services talking to each other)
+- Data consistency (distributed transactions)
+- Debugging difficulty (multiple services, multiple logs)
+- Operational overhead (requires DevOps expertise)
+
+ Modern Approach:
+Containers (Docker) help solve microservices challenges:
+- Each service in its own container
+- Easier deployment and scaling
+- Consistent environments
+- Resource isolation
+
+
+ MONOLITHIC ARCHITECTURE EVOLUTION
+
+STAGE 1: Simple Monolith (Startup Phase)
+
+┌─────────────────────────────────────┐
+│         SINGLE SERVER               │
+├─────────────────────────────────────┤
+│  ┌─────────────────────────────┐   │
+│  │   MONOLITHIC APPLICATION    │   │
+│  │   (All features combined)   │   │
+│  └──────────────┬──────────────┘   │
+│                 │                   │
+│  ┌──────────────▼──────────────┐   │
+│  │      SINGLE DATABASE        │   │
+│  │   (All tables in one DB)    │   │
+│  └─────────────────────────────┘   │
+└─────────────────────────────────────┘
+         User Requests
+              │
+              ▼
+        [Load Balancer] (Optional)
+              │
+              ▼
+        Single Server handles everything
+
+
+STAGE 2: Separated Database (Growth Phase)
+
+         User Requests
+              │
+              ▼
+        [Load Balancer]
+              │
+              ▼
+    ┌─────────────────────┐
+    │   APP SERVER        │
+    │  (Monolithic App)   │──────┐
+    └─────────────────────┘      │
+                                 ▼
+                    ┌─────────────────────┐
+                    │  DATABASE SERVER    │
+                    │   (Separate DB)     │
+                    └─────────────────────┘
+
+
+STAGE 3: Horizontal Scaling (High Traffic)
+
+         User Requests
+              │
+              ▼
+        [Load Balancer]
+              │
+         ┌────┴────┐
+         ▼         ▼
+┌─────────────┐ ┌─────────────┐
+│  APP        │ │  APP        │
+│ SERVER 1    │ │ SERVER 2    │
+│ (Same app)  │ │ (Same app)  │
+└──────┬──────┘ └──────┬──────┘
+       │                │
+       └──────┬────────┘
+              ▼
+     ┌─────────────────┐
+     │   DATABASE      │
+     │   (Single DB    │
+     │   for all apps) │
+     └─────────────────┘
+
+
+STAGE 4: Advanced Scaling (Enterprise)
+
+         User Requests
+              │
+              ▼
+        [Load Balancer]
+              │
+         ┌────┴────┐
+         ▼         ▼
+┌─────────────┐ ┌─────────────┐
+│  APP        │ │  APP        │
+│ SERVER 1    │ │ SERVER 2    │
+└──────┬──────┘ └──────┬──────┘
+       │                │
+       └──────┬────────┘
+              ▼
+    ┌─────────────────────┐
+    │    DATABASE        │
+    │    CLUSTER         │
+    ├─────────────────────┤
+    │  Master DB (writes) │
+    │  Slave DBs (reads)  │
+    └─────────────────────┘
+
+
+ MICROSERVICES ARCHITECTURE
+
+BASIC MICROSERVICES SETUP:
+
+┌─────────────────────────────────────────┐
+│           USER/BROWSER                  │
+└───────────────────┬─────────────────────┘
+                    ▼
+          ┌──────────────────┐
+          │   API GATEWAY    │
+          │  (Entry Point)   │
+          └─────────┬────────┘
+                    │
+        ┌───────────┼───────────┐
+        ▼           ▼           ▼
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│  AUTH       │ │  ORDERS     │ │  PAYMENTS   │
+│  SERVICE    │ │  SERVICE    │ │  SERVICE    │
+└──────┬──────┘ └──────┬──────┘ └──────┬──────┘
+       │                │                │
+       ▼                ▼                ▼
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│  AUTH DB    │ │  ORDERS DB  │ │ PAYMENTS DB │
+│             │ │             │ │             │
+└─────────────┘ └─────────────┘ └─────────────┘
+
+
+ADVANCED MICROSERVICES WITH LOAD BALANCING:
+
+                    User Requests
+                         │
+                         ▼
+                ┌──────────────────┐
+                │   API GATEWAY    │
+                │  + Load Balancer │
+                └─────────┬────────┘
+                          │
+                 ┌────────┴────────┐
+                 ▼                 ▼
+        ┌─────────────┐   ┌─────────────┐
+        │  SERVICE    │   │  SERVICE    │
+        │ DISCOVERY   │   │  REGISTRY   │
+        └─────────────┘   └─────────────┘
+                 │                 │
+        ┌────────┴────────┐       │
+        ▼        ▼        ▼       │
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│  AUTH       │ │  ORDERS     │ │  PAYMENTS   │
+│  SERVICE    │ │  SERVICE    │ │  SERVICE    │
+│  (Instance1)│ │ (Instance1) │ │ (Instance1) │
+└──────┬──────┘ └──────┬──────┘ └──────┬──────┘
+       │               │                │
+       ▼               ▼                ▼
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│  AUTH       │ │  ORDERS     │ │  PAYMENTS   │
+│  SERVICE    │ │  SERVICE    │ │  SERVICE    │
+│  (Instance2)│ │ (Instance2) │ │ (Instance2) │
+└──────┬──────┘ └──────┬──────┘ └──────┬──────┘
+       │               │                │
+       ▼               ▼                ▼
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│  AUTH DB    │ │  ORDERS DB  │ │ PAYMENTS DB │
+│   (Master)  │ │   (Master)  │ │   (Master)  │
+├─────────────┤ ├─────────────┤ ├─────────────┤
+│  AUTH DB    │ │  ORDERS DB  │ │ PAYMENTS DB │
+│   (Replica) │ │   (Replica) │ │   (Replica) │
+└─────────────┘ └─────────────┘ └─────────────┘
+
+
+ COMMUNICATION PATTERNS:
+
+MONOLITHIC:
+
+Client → Load Balancer → App Server → Database
+                    (Everything in one call)
+
+
+MICROSERVICES:
+
+Client → API Gateway → Service A → Service B → Service C
+       (Multiple services chatting with each other)
+       
+Example Order Flow:
+1. Client → API Gateway → Auth Service (verify user)
+2. API Gateway → Orders Service (create order)
+3. Orders Service → Inventory Service (check stock)
+4. Orders Service → Payments Service (process payment)
+5. Orders Service → Shipping Service (schedule delivery)
+6. All services update their own databases
+
+
+ DATA FLOW COMPARISON:
+
+Monolithic Data Flow:
+
+┌─────────┐    ┌─────────┐    ┌─────────┐
+│  Client │───►│   App   │───►│   DB    │
+│         │◄───│         │◄───│         │
+└─────────┘    └─────────┘    └─────────┘
+
+
+Microservices Data Flow:
+
+┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐
+│         │    │   API   │    │ Service │    │ Service │
+│  Client │───►│ Gateway │───►│    A    │───►│    B    │
+│         │◄───│         │◄───│         │◄───│         │
+└─────────┘    └─────────┘    └─────────┘    └─────────┘
+                      │            │              │
+                      ▼            ▼              ▼
+                ┌─────────┐  ┌─────────┐    ┌─────────┐
+                │ Service │  │   DB    │    │   DB    │
+                │ Registry│  │   for   │    │   for   │
+                │         │  │ Service │    │ Service │
+                └─────────┘  │    A    │    │    B    │
+                             └─────────┘    └─────────┘
+
+
+ DEPLOYMENT DIFFERENCE:
+
+Monolithic Deployment:
+
+Deploy: [ ENTIRE APPLICATION PACKAGE ]
+       (Even for a small bug fix)
+
+
+Microservices Deployment:
+
+Deploy: [ Service A ] [ Service B ] [ Service C ]
+       (Update only what changed)
+
+
+KEY TAKEAWAY:
+- Monolithic: Everything bundled together, scales as one unit
+- Microservices: Independent pieces, scale and deploy separately
