@@ -9,6 +9,54 @@ MAINTAINANCE
 LIMITATIONS OF MONOLITHIC:
 1. SERVER PERFORMANCE
 
+# Evolution of Infrastructure: From On-Premises to Cloud & Containers
+
+ 1. On-Premises Infrastructure
+ Configuration:
+- Physical servers running applications directly
+- Single server handling all operations
+
+ Issues:
+- Maintenance: Manual patching, updates, and troubleshooting
+- Hardware: Physical failures, capacity limitations, manual upgrades
+- App Hosting: Single point of failure, no isolation between applications
+
+ 2. Virtual Machines (VMs)
+ Configuration:
+- Hypervisor: Creates multiple VMs on a single physical hardware
+- Example: 8 CPU / 8 GB RAM host → 4 VMs (2 CPU / 2 GB RAM each)
+
+ Issues:
+- Fixed Hardware: VMs tied to the host's capacity
+- Scalability: Difficult to scale beyond physical host limits
+- Resource Overhead: Each VM includes a full OS stack
+
+ 3. Cloud Computing
+ Advantages:
+- Unlimited scalability
+- Pay-as-you-go pricing
+- Managed services
+- Global availability
+
+ Issues:
+- Cost Management: Bills can escalate without proper monitoring
+- Vendor Lock-in: Potential dependency on specific cloud providers
+- Security & Compliance: Shared responsibility model
+
+ 4. Containerization
+ Key Advantages:
+- Lightweight: Share host OS kernel, minimal overhead
+- Easy Management: Orchestration tools (Kubernetes, Docker Swarm)
+- Portability: Run anywhere consistently
+- Microservices: Better application architecture
+- Rapid Deployment: Quick scaling and updates
+
+ Modern Stack Evolution:
+
+On-Premises → Virtualization → Cloud → Containerization → Orchestration
+
+Current Best Practice: Containers on Cloud with Orchestration (e.g., Kubernetes on AWS/Azure/GCP)
+
 CONTAINERS:
 SERVER = CONTAINER
 
