@@ -121,7 +121,7 @@ yum install git -y
 yum install maven -y
 touch file1
 
-ctrl p q
+ctrl p q : to exit from container. 
 
 docker images: to list images
 docker start cont1	: to start cont1
@@ -143,8 +143,8 @@ HISTORY:
    10  lsblk
    11  cd
    12  cd /
-   13  du -sh
-   14  docker run -it --name cont1 amazonlinux
+   13  du -sh    :   to show the size of the  operating system.
+   14  docker run -it --name cont1 amazonlinux  :  -it -> means interactive terminal
    15  docker ps
    16  docker ps -a
    17  docker stop cont1
