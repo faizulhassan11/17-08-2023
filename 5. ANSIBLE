@@ -44,14 +44,18 @@ vim /etc/ssh/sshd_config  (38 uncomment, 63 no=yes)
 systemctl restart sshd
 systemctl status sshd
 
-------------------------------------
+======================================
 Add this line
 PermitRootLogin yes
 PasswordAuthentication yes
 
+
 Comment this line
 #PermitRootLogin prohibit-password
-------------------------------------
+#AuthenticationMethods publickey
+#KbdInteractiveAuthentication no
+
+======================================
 
 ANSIBLE SERVER:
 amazon-linux-extras install ansible2 -y
