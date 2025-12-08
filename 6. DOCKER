@@ -121,7 +121,7 @@ yum install git -y
 yum install maven -y
 touch file1
 
-ctrl p q : to exit from container. 
+ctrl p q : to exit from the container. 
 
 docker images: to list images
 docker start cont1	: to start cont1
@@ -143,7 +143,7 @@ HISTORY:
    10  lsblk
    11  cd
    12  cd /
-   13  du -sh    :   to show the size of the  operating system.
+   13  du -sh   :   to show the size of the  operating system.
    14  docker run -it --name cont1 amazonlinux  :  -it -> means interactive terminal
    15  docker ps
    16  docker ps -a
@@ -181,7 +181,7 @@ Check version now
 DOCKERFILE:
 It's a way of creating images automatically.
 We can reuse the Docker file multiple times.
-In Dockerfile, D will always be Capital always.
+In Dockerfile, D will always be capitalised.
 Components inside the Dockerfile are also capitalised.
 
 Dockerfile -- > Image -- > Container -- > 
@@ -282,14 +282,15 @@ docker rm $(docker ps -a -q) : to delete all conatiners
 docker images -q: to print image IDs
 docker rmi -f $(docker images -q) : to delete all images
 
-HISTORY: 1  yum install docker -y
+HISTORY: 
+    1  yum install docker -y
     2  service docker start
     3  service docker status
     4  docker pull ubuntu
     5  docker images
     6  docker run -it --name cont1 ubuntu
     7  docker ps -a
-    8  docker attach cont1
+    8  docker attach cont1  -> to go inside container
     9  docker images
    10  docker ps -a
    11  docker commit cont1 raham
@@ -337,9 +338,9 @@ HISTORY: 1  yum install docker -y
 
 VOLUMES:
 In Docker, we use volumes to store the data.
-Volume is nothing but a folder inside a container.
+Volume is essentially a folder within a container.
 We can share a volume from one container to another.
-The volume contains the files which have data.
+The volume contains files with data.
 We can attach a single volume to multiple containers.
 But at a time, we can attach only one volume to one container.
 volumes are decoupled (loosely attached)
