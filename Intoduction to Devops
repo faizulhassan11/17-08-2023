@@ -1,0 +1,129 @@
+# Introduction to DevOps
+
+ What is DevOps?
+
+DevOps is a culture, mindset, and set of practices that combine Development (Dev) and Operations (Ops) teams to deliver applications faster, more efficiently, and with higher quality.
+
+DevOps is not a tool, not a technology, and not a framework — it is a methodology that focuses on collaboration, automation, and continuous improvement.
+
+
+
+# Why DevOps?
+
+Traditionally, software companies had two separate teams:
+
+ 1. Development Team
+
+* Plan
+* Code
+* Build
+* Test
+
+They write and test the code, then pass it to the operations team.
+
+ 2. Operations Team
+
+* Deploy
+* Operate
+* Monitor
+
+They deploy the code to servers and ensure the application runs smoothly.
+
+# The Problem: The Wall of Confusion
+
+* Dev Team: “We have given you the right code.”
+* Ops Team: “We deployed exactly what you gave us.”
+
+Miscommunication, delays, bugs, and blame game → Slow delivery.
+
+
+
+# Solution → DevOps
+
+DevOps breaks the wall between Dev and Ops.
+
+➡️ Creates one combined, collaborative team
+➡️ Automates processes
+➡️ Delivers software continuously & quickly
+➡️ Ensures high reliability and stability
+
+This is why DevOps is represented by the infinity loop — a continuous, never-ending cycle.
+
+
+
+# DevOps Life Cycle
+
+The DevOps lifecycle includes:
+
+* Plan
+* Code
+* Build
+* Test
+* Release
+* Deploy
+* Operate
+* Monitor
+
+All steps are connected in a continuous loop.
+
+
+
+# Before DevOps
+
+# 1. Waterfall Methodology
+
+* Linear, step-by-step process
+* Very slow
+* No flexibility
+* Not suitable for modern applications
+
+# 2. Agile Methodology
+
+* Faster than waterfall
+* Iterative development
+* Still lacked complete collaboration between Dev & Ops
+
+DevOps + Agile = Faster delivery + Better operations + Continuous improvement
+
+
+
+# Roles & Responsibilities in DevOps
+
+A DevOps Engineer typically works on:
+
+# 1. Cloud / Server / Network Architectures
+
+* AWS, Azure, GCP
+* Linux servers
+* Networking basics
+
+# 2. Configuration & Maintaining Infrastructure
+
+* Infrastructure as Code (IAAC): Terraform, CloudFormation
+* Configuration tools: Ansible, Puppet, Chef
+
+# 3. CI/CD Pipelines
+
+* Automating build & deployment
+* Tools: Jenkins, GitHub Actions, GitLab CI, Azure DevOps
+
+# 4. Automating Daily Tasks
+
+* Scripting: Bash, Python
+* Removing manual work
+
+# 5. Continuous Monitoring
+
+* Tools: Prometheus, Grafana, ELK Stack, CloudWatch
+
+# 6. Collaboration with All Teams
+
+* Developers, QA, Operations, Security (DevSecOps)
+
+# 7. Migrating From Monolithic to Microservices
+
+* Docker
+* Kubernetes
+* Container orchestration
+
+
