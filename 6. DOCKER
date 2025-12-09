@@ -177,7 +177,6 @@ docker run -it --name cont2 raham
 Check version now
 
 
-
 DOCKERFILE:
 It's a way of creating images automatically.
 We can reuse the Docker file multiple times.
@@ -217,7 +216,7 @@ RUN apt update -y
 RUN apt install git maven tree apache2 -y
 CMD apt install default-jre -y
 
-Build: docker build -t netflix:v2.
+Build: docker build -t netflix:v2 .
 cont: docker run -it --name cont4 netflix:v2
 
 EX-3:
