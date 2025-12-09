@@ -27,7 +27,7 @@ ARCHITECTURE:
 ANSIBLE SERVER: used to communicate with worker nodes and install pkgs, deployment
 WORKER NODES: take commands from the Ansible server and work according to them
 PLAYBOOK: contains the code that is used to act.
-INVENTORY: contains info about worker nodes and groups.
+INVENTORY: includes info on worker nodes and groups.
 
 
 
@@ -48,6 +48,9 @@ systemctl status sshd
 Add this line
 PermitRootLogin yes
 PasswordAuthentication yes
+
+PubkeyAuthentication yes
+
 
 
 Comment this line
@@ -145,7 +148,7 @@ GREEN: ALREADY DONE
 BLUE: SKIPPED
 
 ansible all -a "yum install git -y"
-ansible all -m yum -a "name=git state=present"
+ansible all -m yum -a "name=git state=present"       => -m = module   :   -a = argument
 ansible all -m yum -a "name=docker state=present"  (present=install)
 ansible all -m yum -a "name=docker state=present"  (absent=uninstall)
 ansible all -m yum -a "name=docker state=latest"   (latest=update)
@@ -177,7 +180,7 @@ vim raham.yml
 
 ---
 - hosts: all
-  tasks:
+  tasks:   
     - name: install httpd
       yum: name=httpd state=present
 
@@ -228,7 +231,7 @@ used to execute or skip a specific task
 SINGLE TAG: ansible-playbook raham.yml --tags c
 MULTI TAGS: ansible-playbook raham.yml --tags a,b
 SKIP TAGS: ansible-playbook raham.yml --skip-tags "c"
-MULTI SKIP TAGS: SKIP TAGS: ansible-playbook raham.yml --skip-tags "b,c"
+MULTI SKIP TAGS: ansible-playbook raham.yml --skip-tags "b,c"
 
 
 
