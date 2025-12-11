@@ -496,7 +496,7 @@ FROM ubuntu
 RUN apt update -y
 RUN apt install apache2 -y
 COPY index.html /var/www/html
-CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]      = -->  -D means detach mode
 
 create index.html
 
@@ -647,8 +647,9 @@ docker service scale train=6	: to scale the services
 docker service rollback train: to go back to the previous state
 docker service rm train: to delete the train services
 
-SELF-HEALING: automatically recreates the container itself.
+SELF-HEALING: automatically recreates the container itself.      -> of running services
 
+ 
 CLUSTER LEVEL ACTIVITIES:
 docker swarm leave(worker node)	: to down the woker node
 docker node rm id (manager node): to remove the node permanently
@@ -656,12 +657,12 @@ docker swarm join-token manager: to regenerate the token
 
 
 Note: to join the node on the cluster, use the previous token
-We can delete the running worker node directly
-We need to stop and then delete it
+We can not delete the running worker node directly.
+We need to stop and then delete it.
 
 
 HISTORY:
-   1  docker images
+    1  docker images
     2  docker images
     3  docker swarm init
     4  docker node ls
@@ -703,7 +704,11 @@ HISTORY:
    40  docker swarm joint-token manager
    41  docker swarm join-token manager
    42  history
-[root@manager ~]#
+
+Docker project :
+
+repository = dockernewproject
+Follow the process file in the repository.
 
 =============================================
 PORTAINER:
