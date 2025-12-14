@@ -2,9 +2,11 @@
 
  What is DevOps?
 
-DevOps is a culture, mindset, and set of practices that combine Development (Dev) and Operations (Ops) teams to deliver applications faster, more efficiently, and with higher quality.
+DevOps is a culture, mindset, and set of practices that combine Development (Dev) and Operations (Ops) teams to 
+deliver applications faster, more efficiently, and with higher quality.
 
-DevOps is not a tool, not a technology, and not a framework — it is a methodology that focuses on collaboration, automation, and continuous improvement.
+DevOps is not a tool, not a technology, and not a framework — it is a methodology that focuses on collaboration, 
+automation, and continuous improvement.
 
 
 
@@ -14,17 +16,39 @@ Traditionally, software companies had two separate teams:
 
  1. Development Team
 
-* Plan
+* Plan 
+requirement gathering from the client
+team structure
+technology stack
+budgeting
+timeline and milestones
+architectures
+cloud
+
 * Code
+There are numerous categories of technologies involved in application development, like HTML, CSS, JavaScript, 
+React, CSS, Angular, Vue.js, Node.js, Python, Ruby on Rails, Django, Flask, Java Spring, PHP, Laravel, ASP.NET,
+and many others.
+
 * Build
+packing the application
+Adding the dependencies to the code itself.
+
 * Test
+bugs
+performance
+Does it meet the client's requirements
+security
 
 They write and test the code, then pass it to the operations team.
 
  2. Operations Team
 
 * Deploy
+process of installing the app on the server.
+
 * Operate
+
 * Monitor
 
 They deploy the code to servers and ensure the application runs smoothly.
@@ -42,10 +66,10 @@ Miscommunication, delays, bugs, and blame game → Slow delivery.
 
 DevOps breaks the wall between Dev and Ops.
 
-➡️ Creates one combined, collaborative team
-➡️ Automates processes
-➡️ Delivers software continuously & quickly
-➡️ Ensures high reliability and stability
+ Creates one combined, collaborative team
+ Automates processes
+ Delivers software continuously & quickly
+ Ensures high reliability and stability
 
 This is why DevOps is represented by the infinity loop — a continuous, never-ending cycle.
 
