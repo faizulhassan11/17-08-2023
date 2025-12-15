@@ -218,14 +218,123 @@ User → Nginx → PHP-FPM (Laravel) → MySQL
 
 ---
 
-If you want, I can also explain this in:
+Good point 👍 — ports are **very important**, especially for interviews and DevOps work.
+Here is a **clear + standard port mapping** for **Web, App, and Database servers**.
 
-* **DevOps / AWS architecture**
-* **Docker & Kubernetes**
-* **Interview Q&A format**
-* **Diagram image**
+---
 
-Just tell me 👍
+## 1️⃣ Web Server Ports 🌐
+
+### Common Ports
+
+| Port    | Protocol | Use                          |
+| ------- | -------- | ---------------------------- |
+| **80**  | HTTP     | Default web traffic          |
+| **443** | HTTPS    | Secure web traffic (SSL/TLS) |
+
+### Examples
+
+* **Nginx / Apache / IIS**
+
+```
+http://example.com      → Port 80
+https://example.com     → Port 443
+```
+
+✅ These ports are **publicly accessible**
+
+---
+
+## 2️⃣ Application Server Ports ⚙️
+
+Application servers usually run on **internal ports** (not exposed directly).
+
+### Common App Server Ports
+
+| Technology                      | Port        |
+| ------------------------------- | ----------- |
+| **Node.js (Express)**           | 3000        |
+| **Spring Boot**                 | 8080        |
+| **Tomcat**                      | 8080 / 8443 |
+| **Laravel (php artisan serve)** | 8000        |
+| **Django**                      | 8000        |
+| **Flask**                       | 5000        |
+| **PHP-FPM**                     | 9000        |
+
+### Example Flow
+
+```
+Client → 80/443 (Web Server)
+Web Server → 8080 / 3000 / 9000 (App Server)
+```
+
+⚠️ App server ports are usually **blocked from public access**
+
+---
+
+## 3️⃣ Database Server Ports 🗄️
+
+### Common Database Ports
+
+| Database            | Default Port |
+| ------------------- | ------------ |
+| **MySQL / MariaDB** | 3306         |
+| **PostgreSQL**      | 5432         |
+| **MongoDB**         | 27017        |
+| **Oracle**          | 1521         |
+| **SQL Server**      | 1433         |
+| **Redis**           | 6379         |
+| **Elasticsearch**   | 9200         |
+
+🚫 Database ports should be **private only**
+
+---
+
+## 🔁 Complete Port Flow (3-Tier Architecture)
+
+```
+Internet User
+   ↓
+Web Server  : 80 / 443
+   ↓
+App Server  : 8080 / 3000 / 9000
+   ↓
+DB Server   : 3306 / 5432
+```
+
+---
+
+## 🧠 Real Laravel Production Example
+
+| Layer | Software | Port     |
+| ----- | -------- | -------- |
+| Web   | Nginx    | 80 / 443 |
+| App   | PHP-FPM  | 9000     |
+| DB    | MySQL    | 3306     |
+
+```
+User → Nginx(80/443) → PHP-FPM(9000) → MySQL(3306)
+```
+
+---
+
+## 🎯 Interview Quick Answer
+
+> **Web Server:** 80, 443
+> **Application Server:** 3000, 8080, 8000, 9000 (internal)
+> **Database Server:** 3306, 5432, 27017 (private)
+
+---
+
+If you want, I can also provide:
+
+* **AWS Security Group port rules**
+* **Docker port mapping**
+* **Firewall (ufw/iptables) examples**
+* **An interview cheat sheet (1 page)**
+
+Just tell me 👌
+
 
 
 
