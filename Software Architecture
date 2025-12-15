@@ -1,3 +1,21 @@
+Server: serves the services to the end user.
+
+types :
+1. Physical server: on-prem server
+We need to create and maintain them.
+Limitations:
+1. cost
+2. time-consuming
+3. maintenance
+4. dedicated team
+
+2. virtual server: cloud servers
+We can create them, and the cloud team will maintain
+
+aws --> 34%
+azure --> 20%
+gcp --> 11%
+
 Architecture: blueprint of an application
 
 Software Architecture
