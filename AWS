@@ -1,0 +1,36 @@
+AWS 
+
+EC2 instance
+ec2  --> elastic compute cloud
+
+steps --> seven (7) steps
+
+1. Name & tag = to identify
+
+2. AMI = Amazon Machine Image
+   OS, software, and packages already installed
+   OS to communicate btw user & machine
+
+3. Instance Type = Hardware (CPU & RAM)
+T2.Micro = 1-cpu & 1-Ram : FREE
+
+4. Keypair = login
+Types :
+1. public -> managed by AWS
+2. private managed by user --> (PEM & PPK)
+
+5. Network = VPC & Security-Group (SG)
+vpc = privacy, security & isolation
+Types: 
+1. default
+2. custom
+SG allows all traffic
+port: 0 - 65535
+ssh --> 22: used to connect to the server
+
+6. storage = EBS --> elastic block storage
+default = 8gb  max = 16
+Up to 30gb it is free
+
+7. summary
+
