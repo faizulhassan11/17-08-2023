@@ -2,7 +2,7 @@ DATE: 05-09-2023
 MAVEN:
 It's a build tool.
 Main file is POM.XML (project object model & Extensible markup language)
-POM.XML will have all entire information about the project.
+POM.XML will have all the information about the project.
 It is used to create an artifact (war, jar, ear)
 It is mostly used for Java-based projects.
 It was initially released on 13 July 2004.
