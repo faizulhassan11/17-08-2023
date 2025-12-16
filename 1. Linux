@@ -287,14 +287,20 @@ SED: Stream Editor -- > to replace words in a file.
 
 sed '3c/abc/' file1  -- > to replce 3rd line in a file
 sed 's/linux/unix/' file1-- > single word replace
+sed 's/linux/unix/g' file1-- > replace multiple words in same line  also 
 sed 's/linux/unix/; s/session/class/' file1 -- > multi word replace
 cat file1 -n -- > to print line numbers in a file
 sed '=' file1 -- > to print line numbers in a file
 sed -n '5,13p' file1 -- > to print line 5 to 13
 sed -e '5,13p' file1 -- > to print line 5 to 13 double times
+sed -i '5d' file1 -- > to delete line 5 
+sed -i '5i new line is add' file1 -- > to add line 
+sed -i '5a new line is add' file1 -- > to add line 
 
 %s/is/abc/ -- > to replace is with abc
 %s/is/abc/g -- > to replace is with abc if we have repeated words
+/word : to search for a word
+
 
 NETWORKING:
 ip addr
