@@ -1,14 +1,14 @@
 GIT: GLOBAL INFORMATION TRACKER.
 
 VCS: VERSION CONTROL SYSTEM
-it will keep the code separately for each version.
+It will keep the code separate for each version.
 
 v-1	: 100 lines --- > store (repo-1)
 v-2	: 200 lines --- > store (repo-2)
 v-3	: 300 lines --- > store (repo-3)
 
 REPO: It is a folder where we store our code.
-index.html: it is a basic file for every application
+index.html: It is a basic file for every application
 
 v1 --- > index.html
 v2 --- > index.html
@@ -21,9 +21,9 @@ It will maintain multiple versions of the same file.
 It is platform-independent.
 It is free and open-source.
 They can handle larger projects efficiently.
-It is 3rd generation of vcs.
-it is written on c programming
-it came on the year 2005
+It is the 3rd generation of vcs.
+It is written on c programming
+It came in the year 2005
 
 
 CVCS: CENTRALIZED VERSION CONTROL SYSTEM
@@ -38,7 +38,7 @@ ROLLBACK: Going back to the previous version of the application.
 
 STAGES:
 WORKING DIRECTORY: where we write our source code.
-STAGING AREA: we track files here.
+STAGING AREA: We track files here.
 REPOSITORY: where we store tracked source code
 
 
@@ -52,7 +52,7 @@ git -v	: to check version
 git init : to install .git (local repo)
 
 
-To create file	: vim index.html (content is opt)
+To create file	: vim index.html (content is optional)
 to check status	: git status
 to track file	: git add index.html
 to check status	: git status
@@ -62,7 +62,7 @@ create a file -- > add -- > commit
 
 to show commits	: git log
 to show	last 2 commits: git log -2
-to show commits in single line: git log -2 --oneline
+to show commits in a single line: git log -2 --oneline
 
 
 =================================================
@@ -82,27 +82,27 @@ git show commit_id
 
 
 BRANCHES:
-It is a individaual line of developemt.
-developers write the code on branches.
+It is a individaual line of development.
+Developers write the code on branches.
 initally baraches we create on git.
-after write source code on git we push to github.
-Default barnch is Master.
-Note: when we do a iniatl commit the only default branch will be created.
+after write source code on git, we push to GitHub.
+The default branch is Master.
+Note: when we do a iniatl commit, the only default branch will be created.
 
 Dev -- > Git (Movies branch) -- > code -- > github
 
 
-COMMNDS:
+COMMANDS:
 git branch		: to list the branches
-git branch movies	: to create the branch movie
-git checkout movies	: to switch blw the branches
-git checkout -b dth	: to create and switch dth at same time
+git branch movies	: to create the movie branch
+git checkout movies	: to switch between the branches
+git checkout -b dth	: to create and switch dth at the same time
 git branch -m old new	: to rename a branch
 git branch -D recharge	: to delete a branch
 
-NOTE: to recover the delete branch
+NOTE: to recover the deleted branch
 
-GIT PULL: it will get the branch from github to git
+GIT PULL: it will get the branch from GitHub to git
 git pull origin recharge
 git checkout recharge
 
@@ -121,18 +121,17 @@ NOW PUSH THE CODE TO GITHUB:
 create a repo
 git remote add origin https://github.com/nayakdebasish091/paytm.git
 
-PUSH: to send files form git to github
+PUSH: to send files form git to GitHub
 local: .git & remote: paytm.git
 git push origin movies
 username:
 password:
 
 TOKEN GENERATION: 
-account -- > settings -- >developer settings -- > PAT -- > Classic -- > Generate new token -- > classic -- > name: abcd -- > select 6 options -- > generate 
+account -- > settings -- >developer settings -- > PAT -- > Classic -- > 
+Generate new token -- > classic -- > name: abcd -- > select 6 options -- > generate 
 
 Note: it will be visible only once
-
-
 
 
 
@@ -143,7 +142,7 @@ add
 commit
 push
 
-GIT IGNORE: it will not track the files which we want.
+GIT IGNORE: it will not track the files that we want.
 touch java{1..5}
 vim .gitignore
 j* -- > :wq
@@ -312,22 +311,22 @@ HISTORY:
 
 =================================================
 MERGE:
-adding the files blw one branch to another branch
+Adding the files from one branch to another branch
 git merge branch_name
 
 REBASE:
-adding the files blw one branch to another branch
+Adding the files from one branch to another branch
 git rebase branch_name
 
 
 MERGE VS REBASE:
 merge will show files, rebase will not show files
 merge will not show branches, rebase will show branches
-merge will show entire history, rebase will not.
+merge will show the entire history, rebase will not.
 
 
-STASH: to hide the files which are not comitted.
-note: file need to be tracked but not comitted
+STASH: to hide the files that are not committed.
+Note: the file needs to be tracked but not committed
 
 
 touch file2
@@ -403,15 +402,15 @@ HISTORY:
 ==================================================================
 
 MERGE CONFLICT:
-when we try to merege 2 branches with same file and Different content
-then conflict will raise.
-so we need to reslove the conflict manually
+When we try to merge 2 branches with the same file and Different content,
+a conflict will arise.
+So we need to resolve the conflict manually
 
 
 CHERRY-PICK: 
-we can merge only specific files from one branch to another
+We can merge only specific files from one branch to another
 with the help of commit_id
-git cherry-pik commit_id
+git cherry-pick commit_id
 
 SHOW:
 to show the commits for a file
@@ -422,7 +421,7 @@ git log --stat
 
 
 REVERT: to undo the merging
-git revert branc_name
+git revert branch_name
 
 HISTORY:
 
@@ -452,7 +451,7 @@ HISTORY:
    76  git merge branch-2
    77  vim file1
    78  git add file1
-   79  git commit -m "conflicts"
+   79  git commit -m "conflicts."
    80  git status
    81  git merge branch-2
    82  git branch
@@ -503,21 +502,21 @@ HISTORY:
   127  git clone https://github.com/torvalds/linux.git
 
 INTERVIEW QUESTIONS:
-what is git & why to use ?
-Explain stages of git ?
-Diff blw CVCS & DVCS ?
-How to check commits in git ?
-Explain branches ?
-What is .gitingore ?
-Diff blw git pull vs git push ?
-Diff blw git pull vs git fetch ?
-Diff blw git merge vs git rebase ? 
-Diff blw git merge vs git cherry pick ?
-Diff blw git clone vs git pull ?
-Diff blw git clone vs git fork ?
-Diff blw git revert vs git restore ?
-merge conflict & how to resolve ?
-what is git stash ?
+What is git & why to use?
+Explain the stages of git?
+Diff between CVCS & DVCS?
+How to check commits in git?
+Explain branches?
+What is .gitingore?
+Diff between git pull and git push?
+Diff between git pull and git fetch?
+Diff between git merge and git rebase? 
+Diff between git merge and git cherry-pick?
+Diff between git clone and git pull?
+Diff between git clone and git fork?
+Diff between git revert and git restore?
+merge conflict & how to resolve?
+What is git stash?
 
 
 
