@@ -1,0 +1,25 @@
+What is git & why do we need to use it?
+Difference btw distributed and a centralized version control system?
+what is rollback & how to do rollback?
+explain the stages/architecture of git?
+what is local repo?
+what is local branch?
+What is the default branch in git?
+Difference btw git & GitHub?
+difference btw clone & git fork?
+difference btw git merge & git rebase?
+difference btw git merge & git revert?
+difference btw git pull & git fetch?
+difference btw git pull & git clone?
+difference btw git pull & git push?
+What are git cherry-pick & .git ignore & git restore & stash?
+difference btw git merge & git cherry-pick?
+
+========================================================================================
+
+MAVEN
+
+what is maven?
+types of artifacts?
+
+
