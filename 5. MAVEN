@@ -1,14 +1,26 @@
 DATE: 05-09-2023
 MAVEN:
 It's a build tool.
-Main file is POM.XML (project object model & Extensible markup language)
-POM.XML will have all the information about the project.
+It is also called a project management tool.
+it create entire project structure.
 It is used to create an artifact (war, jar, ear)
 It is mostly used for Java-based projects.
 It was initially released on 13 July 2004.
-Maven is written in Java (1.8.0)
-BUILD : process of adding dependencies for the source code.
+Maven is written in Java (1.8.0) by Apache Software Foundation.
+BUILD: process of adding dependencies for the source code.
 Dependecies : lib , modules
+
+
+Main file is POM.XML (project object model & Extensible markup language)
+POM.XML will have all the information about the project.
+If we don't have this file, our project will not work.
+developer will give this file along with the code.
+Note: this file will be limited to only one project.
+
+Problems without Maven:
+1. we cant create artifacts.
+2. we cant create a project structure.
+3. we cant build and deploy the apps.
 
 RAW: .java  (we can't use it)
 .java -- > compile -- > .class -- > .jar -- > package -- > .war
@@ -19,6 +31,7 @@ RAW: .java  (we can't use it)
 libs	: it's a predefined package used for code.
 
 ARTIFACTS: It's the final product.
+
 JAR = JAVA ARCHIVE         : Backend
 WAR = WEB ARCHIVE          : Frontend + Backend
 EAR = ENTERPRISE ARCHIVE   : JAR + WAR
@@ -38,6 +51,7 @@ PLUGIN: It's a small software that automates our work.
 With the plugins, we can use tools without needing to install them.
 
 GOAL: It's a command used to perform a task.
+Goals refer to pom.xml to execute.
 MAVEN follows a lifecycle
 
 mvn compile	: to compile the source code
@@ -54,6 +68,14 @@ life cycle		no life cycle
 procedural		declarative
 plugins			no plugins
 no scripts 		scripts
+
+Programming vs Build:
+
+java :  maven
+python: gradle
+.net: VS Code
+c, c# : make file
+Node.js: npm
 
 WHAT IF BUILD FAILS:
 1. CHECK JAVA VERSION FOR MAVEN
