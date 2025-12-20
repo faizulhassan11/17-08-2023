@@ -7,19 +7,21 @@ It is used to create an artifact (war, jar, ear)
 It is mostly used for Java-based projects.
 It was initially released on 13 July 2004.
 Maven is written in Java (1.8.0)
+BUILD : process of adding dependencies for the source code.
+Dependecies : lib , modules
 
 RAW: .java  (we can't use it)
 .java -- > compile -- > .class -- > .jar -- > package -- > .war
 
-.class 	: which can be executable
-.jar    : group of .class files (works for backend)
+.class 	: which can be executable 
+.jar    : group of .class files (works for backend)   
 .war	: it has frontend and backend code (FE: HTML, CSS, JS & BE: JAVA)
-libs	: its a pre defined package used for code.
+libs	: it's a predefined package used for code.
 
 ARTIFACTS: It's the final product.
-JAR = JAVA ARCHIVE
-WAR = WEB ARCHIVE 
-EAR = ENTERPRISE ARCHIVE
+JAR = JAVA ARCHIVE         : Backend
+WAR = WEB ARCHIVE          : Frontend + Backend
+EAR = ENTERPRISE ARCHIVE   : JAR + WAR
 
 ARCHITECTURE:
 
@@ -33,7 +35,7 @@ sudo dnf install java-1.8.0-amazon-corretto-devel -y
 =====================================================
 
 PLUGIN: It's a small software that automates our work.
-with the plugins, we can use tools without installing them.
+With the plugins, we can use tools without needing to install them.
 
 GOAL: It's a command used to perform a task.
 MAVEN follows a lifecycle
@@ -42,7 +44,7 @@ mvn compile	: to compile the source code
 mvn test	: to test the code
 mvn package	: to create artifact (project directory)
 mvn install	: to create artifact (maven home dir .m2)
-mvn clean packge: to perform entire goals 
+mvn clean package: to perform all the goals 
 mvn clean	: to delete target
 
 
