@@ -22,15 +22,15 @@ It is platform-independent.
 It is free and open-source.
 They can handle larger projects efficiently.
 It is the 3rd generation of vcs.
-It is written on c programming
+It is written in C programming
 It came in the year 2005
 
 
 CVCS: CENTRALIZED VERSION CONTROL SYSTEM
-EX: SVN: it can store code on a single repo.
+EX: SVN: it can store code in a single repo.
 
 DVCS: DISTRIBUTED VERSION CONTROL SYSTEM
-EX: GIT: it can store code on Multiple repo.
+EX: GIT: it can store code in multiple repositories.
 
 
 ROLLBACK: Going back to the previous version of the application.
@@ -66,6 +66,14 @@ to show commits in a single line: git log -2 --oneline
 
 
 =================================================
+
+git -> developer laptop
+github -> internet
+
+2.40.1  Version: 
+2 -> Major ,   40 -> Minor , 1 -> Patch
+
+
 
 CONFIGURING USER AND EMAIL:
 
