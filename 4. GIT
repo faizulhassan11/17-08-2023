@@ -409,6 +409,15 @@ HISTORY:
 
 ==================================================================
 
+
+git reset: to undo the commits
+
+Long living branches: these braches we won't delete and we use them frequently.
+Ex: Master, Main
+
+Short living branches: these branches we will delete, and we dont use them frequently.
+Ex: release, bugfix,.......
+
 MERGE CONFLICT:
 When we try to merge 2 branches with the same file and Different content,
 a conflict will arise.
@@ -508,6 +517,7 @@ HISTORY:
   125  git revert branch-1
   126  ll
   127  git clone https://github.com/torvalds/linux.git
+
 
 INTERVIEW QUESTIONS:
 What is git & why to use?
