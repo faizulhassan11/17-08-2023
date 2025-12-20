@@ -41,3 +41,9 @@ what is jenkins port number
 how to schedule work in jenkins
 explain cron syntax
 what is pollscm
+explain about webhooks
+explain about pipelines
+types of pipelines & difference btw them
+what is multi-stage pipline
+what is pipeline as a code
+what is input parameter in pipeline
