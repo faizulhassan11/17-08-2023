@@ -1,4 +1,19 @@
-LINUX: Free and Open-source OS
+LINUX: 
+It is a kernel
+who: Linus Torvalds
+type: Free and Open-source OS [see, modify, distribute]
+Programming: C programming
+initial: Freax
+
+Advantages:
+Free and Open-source
+Anti-virus free
+Multi-user based
+Efficient
+Installation of software & languages fast
+supports with All N/W
+
+
 OS: Operating system -- > communication between user & system.
 
 TYPES OF OS:
@@ -315,6 +330,10 @@ ps  -- > to check the process
 kill -9 32555 -- > to kill a process
 ps aux -- > to list processes in ids
 
+Note: if we stop the server, then the service inside the server also stops.
+chkconfig jenkins on
+the above command will restart the Jenkins service all the time.
+
 ===========================================================================
 
 LINUX DIRECTORY SYSTEM:
@@ -322,7 +341,7 @@ FHS
 
 
 bin: It stores all the binary files, and also it stores the commands that had been executed by the user.
-sbin: It stores the commands that had been executed by the super user.
+sbin: It stores the commands that have been executed by the superuser.
 boot: It contains boot images & boot files.
 dev: It contains all the device files
 etc: It contains all the host-specific system configuration files.
