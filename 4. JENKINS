@@ -1,13 +1,14 @@
 JENKINS:
 It's a CI/CD tool.
+Reality: Jenkins is only for CI.
 
-ci : continuous integration : continuous build + continuous test 
+ci: continuous integration: continuous build + continuous test 
 old code with new code
-before CI, we waste time and everything is manual work.
+before CI, we waste time, and everything is manual work.
 After CI, everything is automated.
 
 cd : continuous delivery	  : deployment manually to prod env
-cd : continuous deployment : deployment automatically to prod env
+cd: continuous deployment: deployment automatically to prod env
 
 PIPELINE:
 STEP BY STEP EXECUTION OF A PARTICULAR PROCESS.
@@ -34,6 +35,13 @@ Koshuke Kawaguchi invented Jenkins at Sun Microsystems in 2004.
 inital name was hudson -- > paid -- > orcle -- > free 
 it consist lot of plugins.
 Port number for Jenkins is 8080.
+It can automate the entire sdlc.
+default path: var/lib/jenkins
+
+Alternatives:
+Bamboo, GO CI, Circle CI, Travis, Semaphore, Buddy Master, Gitlab, Harness, Argod.........
+
+cloud: AWS Codepipeline, Azure pipeline........
 
 SETUP: CREATE EC2 WITH ALL TRAFFIC (8080)
 
@@ -68,17 +76,25 @@ Source Code Management -- > GIT -- > https://github.com/devopsbyraham/jenkins-ja
 Build Steps -- > add setp -- > Execute shell -- > save
 
 ================================================================================================================================================
-07-09-2023:
 
+workspace: a place where our job outputs will be stored.
+default: /var/lib/jenkins/workspace
 
+custom workspace: storing the job's output in our own folders
+cd 
+mkdir custom-dir
+cd /
+chown jenkins:jenkins /root
+chown jenkins:jenkins /root/custom-dir
 
 PARAMETERS: used to pass input for the jobs
-choice: when we have multiple options we can select one
+choice: when we have multiple options, we can select one
 
-create a ci job -- > Configure -- > This project is parameterized -- > choice -- > name: env choice: dev,test,uat, prod -- > save
+create a ci job -- > Configure -- > This project is parameterized -- > choice -- > 
+name: env choice: dev, test,uat, prod -- > save
 
 string: to pass multiple inputs 
-multi line string: to pass input on multiple lines
+multi-line string: to pass input on multiple lines
 bool: ture of false
 file: to build files
 
@@ -102,8 +118,8 @@ CHANGING BUILD LIMITS:
 dashboard -- > manage jenkins -- > nodes -- > built-in node -- > configure -- > number of executors -- > 3 -- > save
 
 
-HOW TO RESLOVE ISSUE WHEN JENKINS SERVER IS CRASHED: 
-when we stop and start server your ip will change and the services inside server also stop.
+HOW TO RESOLVE ISSUES WHEN THE JENKINS SERVER IS CRASHED: 
+when we stop and start the server, your ip will change, and the services inside the server also stop.
 
 
 
@@ -111,7 +127,7 @@ RESTORING DELETE JOBS:
 
 Dashboard -- > Manage Jenkins -- > Plugins -- > available plugins -- > Job Configuration History -- > install -- > go back to top page
 
-now try to delete a job
+Now try to delete a job
 
 HISTORY:
 31  vim jenkins.sh
