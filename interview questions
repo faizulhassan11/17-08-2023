@@ -2,8 +2,8 @@ What is git & why do we need to use it?
 Difference btw distributed and a centralized version control system?
 what is rollback & how to do rollback?
 explain the stages/architecture of git?
-what is local repo?
-what is local branch?
+What is a local repo?
+What is a local branch?
 What is the default branch in git?
 Difference btw git & GitHub?
 difference btw clone & git fork?
@@ -21,5 +21,23 @@ MAVEN
 
 what is maven?
 types of artifacts?
+what is POM.XML
+what is maven Homepath
+Explain maven lifecycle
+what is a Goal and how it will work
+what is the diggerence btw maven & ant
 
 
+============================================================================================
+
+JENKINS
+
+what is ci/cd 
+what is pipeline
+explain about jenkins
+what is workspace and how to create custom workspace
+explain the process of integration github with jenkins
+what is jenkins port number
+how to schedule work in jenkins
+explain cron syntax
+what is pollscm
