@@ -291,7 +291,7 @@ SHELL VS COMMAND VS RAW
     - name: install maven
       command: yum install maven -y
 
-    - name: install docker
+    - name: install Docker
       raw: yum install docker -y
 
 RAW >> COMMAND >> SHELL
@@ -435,7 +435,7 @@ LOOPS:
 
 TROUBLESHOOTING:
 
-interview question:
+Interview question:
 
 to show the configuration of nodes
 ansible all -m setup | grep -i cpus
@@ -450,7 +450,7 @@ cat known_hosts
 
 ansible all --list-host
 
-This is a list of all node from the inventory file which are connected or not.
+This is a list of all nodes from the inventory file that are connected or not.
 
 
 HISTORY:
@@ -528,14 +528,14 @@ HISTORY:
 =============================================================================================================
 
 HANDLERS: here one task depends on another task.
-when task-1 is executed it will call task-2 to perform the action.
-ex: if we want to restart httpd we need to install it
-restarting depends on installing.
+When task-1 is executed, it will call task-2 to perform the action.
+ex: if we want to restart HTTP, we need to install it
+Restarting depends on installing.
 Note: here we have notify module.
 
 - hosts: all
   tasks:
-    - name: installing apache on RedHat
+    - name: installing Apache on RedHat
       yum: name=httpd state=present
       notify: starting apache
   handlers:
@@ -546,10 +546,10 @@ ansible all -a "systemctl status httpd"
 
 
 ANSIBLE VAULT:
-it is used to encrypt the files, playbooks ----
+It is used to encrypt the files, playbooks ----
 Technique: AES256 (USED BY FACEBOOK)
-vault will store our data very safely and securely.
-if we want to access any data which is in the vault we need to give a password.
+Vault will store our data very safely and securely.
+if we want to access any data which is in the vault, we need to give a password.
 Note: we can restrict the users to access the playbook aslo.
 
 ansible-vault create creds1.txt		: to create a vault
@@ -557,13 +557,13 @@ ansible-vault edit creds1.txt		: to edit a vault
 ansible-vault rekey creds1.txt		: to change password for a vault
 ansible-vault decrypt creds1.txt	: to decrypt the content	
 ansible-vault encrypt creds1.txt	: to encrypt the content	
-ansible-vault view creds1.txt		: to show the content without decrypt
+ansible-vault view creds1.txt		: to show the content without decrypting
 	
-PIP: its a pkg manager used to install python libs/modules
+PIP: it's a pkg manager used to install python libs/modules
 
-Redhat: yum
+Red Hat: yum
 ubuntu: apt
-python: pip
+Python: pip
 
 
 
@@ -589,9 +589,9 @@ ANSIBLE SETUP MODULES: Used to print the complete info of worker nodes.
 
 ROLES: 
 used to divide the playbook into directory structures.
-we can organize the playbooks.
-we can encapsulate the data.
-we can reduce the playbook length.
+We can organize the playbooks.
+We can encapsulate the data.
+We can reduce the playbook length.
 
 mkdir playbooks
 cd playbooks
@@ -748,13 +748,16 @@ Debug: used to print the msgs/customize ops
 
 - hosts: all
   tasks:
-    - name: to pring mgs
+    - name: to print messages
       debug:
-        msg: "the node name os: {{ansible_hostname}}, the total mem is: {{ansible_memtotal_mb}}, free mem is {{ansible_memfree_mb}}, the flavour of ec2 is: {{ansible_os_family}}, toto cpus is: {{ansible_processor_vcpus}}"
+        msg: "the node name os: {{ansible_hostname}}, the total mem is: {{ansible_memtotal_mb}}, 
+free mem is {{ansible_memfree_mb}}, the flavour of ec2 is: {{ansible_os_family}}, 
+toto cpus is: {{ansible_processor_vcpus}}"
 
-JINJA2 TEMPLATE: used to get the customized op, here its a text file which can extract the variables and these values will change as per time.'
+JINJA2 TEMPLATE: used to get the customized op, here it's a text file which can extract the variables, 
+and these values will change over time.'
 
-LOOKUPS: this module used to get data from files, db and key-values
+LOOKUPS: this module is used to get data from files, db and key-values
 
 
 - hosts: dev
@@ -762,15 +765,15 @@ LOOKUPS: this module used to get data from files, db and key-values
     a: "{{lookup('file', '/root/creds.txt') }}"
   tasks:
     - debug:
-        msg: "hai my user name is {{a}}"
+        msg: "hai, my user name is {{a}}."
 
 cat creds.txt
 user=raham
 
 STRATAGIES:
 
-LINEAR: execute tasks sequencially
-FREE: execute all tasks on all node at same time
+LINEAR: execute tasks sequentially
+FREE: execute all tasks on all nodes at the same time
 ROLLING:
 SEQUENC:
 BATCH:
@@ -782,7 +785,7 @@ BATCH:
     a: "{{lookup('file', '/root/creds.txt') }}"
   tasks:
     - debug:
-        msg: "hai my user name is {{a}}"
+        msg: "hai, my user name is {{a}}."
 
 =============================================================================
 
@@ -799,21 +802,21 @@ P : PHP
   tasks:
     - name: installing apache
       yum: name=httpd state=present
-    - name: installing mysql
+    - name: installing MySQL
       yum: name=mysql state=present
-    - name: installing python
+    - name: installing Python
       yum: name=python3 state=present
 
 =============================================================================
 
-NETFLIX DEPLOPYMET:
+NETFLIX DEPLOYMENT:
 
 - hosts: test
   tasks:
-    - name: installing apache server
+    - name: installing Apache server
       yum: name=httpd state=present
 
-    - name: activating apache server
+    - name: activating Apache server
       service: name=httpd state=started
 
     - name: installing git
@@ -825,19 +828,19 @@ NETFLIX DEPLOPYMET:
         dest: "/var/www/html"
 
 TOMCAT SETUP:
-USE TOMCAT.YML, CONTEXT.XML AND TOMCAT-USER.XML FROM BELOW REPO
+USE TOMCAT.YML, CONTEXT.XML, AND TOMCAT-USER.XML FROM THE BELOW REPO
 https://github.com/RAHAMSHAIK007/all-setups.git
 
 CONDITIONS:
 CLUSTER: GROUP OF NODES/SERVERS
 
-HOMOGENIUS: SERVERS WITH SAME OS AND FLAVOUR
+HOMOGENIUS: SERVERS WITH THE SAME OS AND FLAVOUR
 HETEROGENEOUS: SERVERS WITH DIFFERENT OS AND FLAVOUR
 
 
 - hosts: all
   tasks:
-    - name: installing git* on RedHat
+    - name: installing git* on Red Hat
       yum: name=git* state=present
       when: ansible_os_family == "RedHat"
 
@@ -851,11 +854,11 @@ EX-2:
 
 - hosts: all
   tasks:
-    - name: installing apache on RedHat
+    - name: installing Apache on RedHat
       yum: name=httpd state=present
       when: ansible_os_family == "RedHat"
 
-    - name: installing apache on Ubuntu
+    - name: installing Apache on Ubuntu
       apt: name=apache2 state=present
       when: ansible_os_family == "Debian"
 
@@ -916,4 +919,3 @@ HISTORY:
   346  vim tomcat.yml 
   347  ansible-playbook tomcat.yml 
   348  history
-[root@ansible ~]# 
