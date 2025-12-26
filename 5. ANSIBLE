@@ -27,7 +27,7 @@ ARCHITECTURE:
 ANSIBLE SERVER: used to communicate with worker nodes and install pkgs, deployment
 WORKER NODES: take commands from the Ansible server and work according to them
 PLAYBOOK: contains the code that is used to act.
-INVENTORY: includes info on worker nodes and groups.
+INVENTORY: includes information about worker nodes and groups.
 
 
 
@@ -89,6 +89,7 @@ These commands will be overridden.
 
 ansible all -a "yum install git -y"
 ansible all -a "yum install maven -y"
+
 ansible all -a "mvn --version"
 ansible all -a "touch file1"
 ansible all -a "ls"
@@ -787,6 +788,24 @@ BATCH:
     - debug:
         msg: "hai, my user name is {{a}}."
 
+
+ASYNCHRONOUS & POLLING ACTIONS:
+For every task in ansible we can't set a time limit
+If the task is not performed within that time limit ansible will stop the playbook
+execution this is called as asynchronous and polling.
+
+- hosts: all
+  ignore_errors: yes
+  tasks:
+    - name: sleeping
+      command: sleep 30
+      async: 10
+      poll: 20
+    - name: install git
+      yum: name=git state=present
+
+
+
 =============================================================================
 
 LAMP:
@@ -809,6 +828,22 @@ P : PHP
 
 =============================================================================
 
+COMMENTS:
+In YAML syntax, we have only single-line comments; we don't have multi-line comments
+
+DRY RUN:
+Ansible dry run or Ansible check mode feature is to validate your playbook
+before execution.
+If we execute the playbook with a dry run, it won't make any changes to the worker
+node.
+
+WEB SERVER: to show the app : httpd : 80 : /var/www/html
+frontend code
+
+APP SERVER: To use the app : tomcat : 8080 : tomcat/webapps
+frontend code + backend code
+
+
 NETFLIX DEPLOYMENT:
 
 - hosts: test
@@ -830,6 +865,20 @@ NETFLIX DEPLOYMENT:
 TOMCAT SETUP:
 USE TOMCAT.YML, CONTEXT.XML, AND TOMCAT-USER.XML FROM THE BELOW REPO
 https://github.com/RAHAMSHAIK007/all-setups.git
+
+=========================================================================
+LINK FOR SCRIPT & PLAYBOOKS: https://github.com/RAHAMSHAIK007/all-setups.git
+LINK FOR SCRIPT & PROJECT: https://github.com/devopsbyraham/jenkins-java-project.git
+
+
+Install Jenkins on ansible server and connect to the dashboard
+
+integrating Ansible with Jenkins:
+
+1. Install the Ansible plugin
+2. configure ansible tool
+manage Jenkins --> tools --> ansible --> name : ansible & path to ansible
+executables directory: /usr/bin --> save
 
 CONDITIONS:
 CLUSTER: GROUP OF NODES/SERVERS
