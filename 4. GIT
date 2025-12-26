@@ -519,22 +519,3 @@ HISTORY:
   127  git clone https://github.com/torvalds/linux.git
 
 
-INTERVIEW QUESTIONS:
-What is git & why to use?
-Explain the stages of git?
-Diff between CVCS & DVCS?
-How to check commits in git?
-Explain branches?
-What is .gitingore?
-Diff between git pull and git push?
-Diff between git pull and git fetch?
-Diff between git merge and git rebase? 
-Diff between git merge and git cherry-pick?
-Diff between git clone and git pull?
-Diff between git clone and git fork?
-Diff between git revert and git restore?
-merge conflict & how to resolve?
-What is git stash?
-
-
-
