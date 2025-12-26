@@ -34,3 +34,8 @@ Up to 30gb it is free
 
 7. summary
 
+When we stop the server, it will bring the following changes:
+
+1. Public ip will change
+2. Services will be stopped
+3. Charges will be applied to the ebs volume only.
