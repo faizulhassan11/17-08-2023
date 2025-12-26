@@ -150,6 +150,7 @@ esc: to get out of insert mode
 
 A: End of line
 I: Starting of line
+i: insert the content
 O: Create a new line above the existing line
 o: Create a new line below the existing line
 
@@ -262,8 +263,8 @@ chmod 666 file2
 1	: acl -- > access control list
 
 
-chown raham file1: to make raham as owner of file1
-chgrp raham file1: to make raham as group for file1
+chown raham file1: to make raham the owner of file1
+chgrp raham file1: to make raham the group for file1
 chown raham:raham file2 : to make raham user&group for file2
 chown rajesh:raham file1: rajesh as user & raham as group
 
@@ -283,10 +284,10 @@ DAY-05:
 GREP: Global Regular Expression Print
 to search for a particular word
 
-grep is file1: to search word is on file1
+grep is file1: to search for the word in file1
 grep IS file1 -i: to avoid the case sensitive
 grep IS file1 -i -v: to avoid the line which is having word is
-cat file1 | grep is: to search word is on file1
+cat file1 | grep is: to search for the word is in file1
 cat file1 | grep IS -i: to avoid the case sensitive
 cat file1 | grep IS -iv: to avoid the line which is having word is
 
@@ -353,5 +354,5 @@ proc: It is used to see all the processing-related files (Hardware details).
 srv: It stores all the service related information provided by the system.
 sys: It stores any new changes that are obtained while changing Hardware.
 tmp: It stores temporary files and has access to all.
-usr: It contains local system files which are continuing with the old system architecture.
+usr: It contains local system files that continue with the old system architecture.
 var: It stores all the system services.
