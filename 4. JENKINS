@@ -98,13 +98,18 @@ multi-line string: to pass input on multiple lines
 bool: ture of false
 file: to build files
 
+ADMIN TASK
 
-PORT CHANGING:
+CHANGING PORT NUMBER OF JENKINS:
+
 vim /usr/lib/systemd/system/jenkins.service
 67 (8080=8090)
+
 systemctl daemon-reload
 systemctl restart jenkins.service
 systemctl status jenkins.service
+
+When we change the configuration of any servie we need to restart.
 
 
 PASSWORDLESS LOGIN:
@@ -182,16 +187,16 @@ NOTE: use server time (utc)
 CREATE A CI JOB: Build Triggers -- > Build periodically -- > * * * * * -- > save
 
 Limitations:
-will not check the code is changed or not.
+will not check whether the code has changed or not.
 
-POLLSCM: it will build when code is changed only.
+POLLSCM: it will build when the code is changed only.
 Note: need to set the time limit.
 
 CREATE A CI JOB: Build Triggers -- > Poll Scm -- > * * * * * -- > save
 
 
 limitation:
-9am -- > 7 am : time waste 
+9 am -- > 7 am : time wasted 
 
 Webhooks: it will trigger the build the moment we commit the code
 
@@ -201,20 +206,20 @@ Payload URL: http://13.39.14.187:8080/github-webhook/ -- > Content type: applica
 Jenkins Dashboard -- > create ci job -- > Build triggers -- > GitHub hook trigger for  GITScm polling -- > save  
 
 
-THROTTLE BUILD: to restrict number of builds per interval.
+THROTTLE BUILD: to restrict the number of builds per interval.
 create job -- > Throttle builds -- > Number of build: 3 -- > time period: hours -- > save 
 
-make builds and test them
+make builds and tests them
 
 =================================================================
 
 MASTER AND SLAVE:
-it is used to distribute the builds.
+It is used to distribute the builds.
 it reduce the load on jenkins server.
 communication blw master and slave is ssh.
-Here we need to install agent (java-11).
+Here we need to install the agent (java-11).
 slave can use any platform.
-label = way of assingning work for slave.
+label = a way of assigning work for a slave.
 
 SETUP:
 #STEP-1 : Create a server and install java-11
@@ -226,7 +231,7 @@ Dashboard -- > Manage Jenkins -- > Nodes & Clouds -- > New node -- > nodename: a
 CONFIGURATION OF SALVE:
 
 Number of executors : 3 #Number of Parallel builds
-Remote root directory : /tmp #The place where our output is stored on slave sever.
+Remote root directory : /tmp #The place where our output is stored on the slave server.
 Labels : swiggy #place the op in a particular slave
 useage: last option
 Launch method : last option 
@@ -249,20 +254,42 @@ create a job2
 job1 -- > configuration -- > post build actions -- > build other projects -- > name of job2 -- > save
 
 =========================================================================
+Note: if we stop the server, then the services inside the server also stop.
+chkconfig jenkins on
+the above command will restart the Jenkins service all the time.
+
 PIPELINE: 
-stpe by step execution of particular process
-series of events interlinekd with each other
-pipelines are sytnax-based
+step-by-step execution of a particular process
+series of events interlinked with each other
+pipelines are syntax-based
 we use groovy language to write pipleine.
-its a DSL (domain specific language)
+its a DSL (domain-specific language)
 it gives the vizualization of a process execution.
 
 
 CODE -- > BUILD -- > TEST -- > ARTIFACT -- > DEPLOY
 
+Why to user?
+to automate the work.
+to have clarity about the stage.
+
 TYPES:
 1. SCRIPTED 
 2. DECLARATIVE
+
+
+SCRIPTED:     		DECLARATIVE:
+short         		long 
+no stages     		it has stages
+start node    		start with pipeline 
+
+Note: if we have a syntax issue non of the stages will execute.
+
+pipeline syntax:
+To write the pipeline, we use DSL.
+we use groovy script for jenkins pipeline.
+It consists of blocks that include stages.
+it includes () & {} braces. 
 
 DECLARATIVE PIPELINE:
 
@@ -280,7 +307,7 @@ pipeline {
     }
 }
 
-MULTI STAGE:
+MULTI-STAGE:
 
 pipeline {
     agent any
@@ -336,9 +363,51 @@ pipeline {
     }
 }
 
+INPUT PARAMETERS: based on user input, the pipeline is going to execute.
+
+pipeline {
+    agent any 
+    
+    stages{
+        stage('checkout') {
+            steps {
+                git 'https://github.com/devopsbyraham/jenkins-java-project.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('artifact') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+		stage('deploy') {
+            input {
+				message "Are your inputs correct ?"
+				ok "yes"
+			}
+            steps {
+                echo "my code is deployed"
+            }
+        }
+    }
+}
+
+Note : In real time, providing manual approval is best practise for Jenkins pipelines
+Note : if we have a syntax issue, none of the stages will execute.
 
 PIPELINE AS A CODE:
-executing multiple commands or multiple actions on a single stage.
+Running more than one command/action inside a single stage.
+to reduce the length of the code.
+to save time.
 
 pipeline {
     agent any
@@ -355,8 +424,8 @@ pipeline {
     }
 }
 
-PIPELINE AS A CODE OVER MULTI STAGE:
-executing multiple commands or multiple actions on a multiple stage.
+PIPELINE AS A CODE OVER MULTI-STAGE:
+executing multiple commands or multiple actions on multiple stages.
 
 
 pipeline {
@@ -482,17 +551,45 @@ pipeline {
 12-09-2023:
 
 VARIABLES:
-assigning the value 
-
+It is used to store values that are going to change frequently.
+ex:
 a=10
 name=raham
 
-1. USER DEFINED VARIABLES:
-a. local vars: we can define inside job
+1. USER-DEFINED VARIABLES:
+a. local vars: we can define inside the job,  
+only works for a single job.
+
+New Item --> Name: abc --> FreeStyle --> ok --> Build --> Execute Shell
+
+name=ali
+echo "hai all my name is $Name, $Name is from hyderabad"
+
+
 2. global vars: we can define outside jobs
 
+Dashboard --> mange Jenkins --> System --> Global properties --> Environment variables --> add : Name: name value: ali 
+--> save
+
+Note: while defining variable spaces will not be given.
+Local variables will be a high priority.
+
+Limitation: some values cant be defined by the user because these values will change from build to build.
+ex: build number, time, name, url ....
+
+Jenkins ENV Variables: these are defined by Jenkins itself.
+These variables can be changed from build to build.
+These variables will be on upper case.
+These variables can be defined only once.
+
+echo "the build number is $BUILD_NUMBER , the job is $JOB_NAME"
+
+print env: gives all env vars of Jenkins
 2. JENKINS ENV VARS:
-their vars are going to change as per build.
+Their vars are going to change as per build.
+
+find / -name jenkins.service
+Find command is used to find the path of a file.
 
 HOW TO PASS VARIABLES ON PIPELINE:
 
@@ -507,7 +604,7 @@ pipeline {
     stages {
         stage('one') {
             steps {
-                echo "hai all my name is $name and im from $loc"
+                echo "hai all my name is $name, and I'm from $loc"
                 sh 'env'
             }
         }
@@ -517,11 +614,11 @@ pipeline {
 =====================================================================
 
 POST BUILD ACTIONS:
-actions the we perform after the build is called as post build action.
+actions the we perform after the build are called as post build action.
 
-always: if build failed or success it will run the post actions.
-success: it will execute post actions only when the build is successful.
-failure: it will execute post actions only when the build is failed.
+always: if the build failed or success it will run the post actions.
+success: It will execute post actions only when the build is successful.
+failure: It will execute post actions only when the build is failed.
 
 pipeline {
     agent any 
@@ -539,17 +636,17 @@ pipeline {
     }
     post {
         always {
-            echo "the build is done"
+            echo "The build is done."
         }
     }
 }
 
 ===============================================================================================
 
-RBAC: ROLE BASE ACCESS CONTROL
+RBAC: ROLE-BASED ACCESS CONTROL
 
-in real time to restrict the access for jenkins console we use rbac.
-with rbac we can give set of limited permissions for user.
+in real time to restrict access for jenkins console, we use rbac.
+with rbac we can give a set of limited permissions for user.
 
 1. user:
 dashboard -- > manage jenkins -- > users -- > create user (ramesh, suresh)
@@ -585,7 +682,7 @@ TOMCAT SETUP:
 public-ip slave:8080
 manager app -- > usrername and passowd
 
-Download pluguin -- > Deploy to container : this is to deploy on tomcat
+Download plugin -- > Deploy to container : this is to deploy on tomcat
 
 
 Dashboard
@@ -606,7 +703,7 @@ TROUBLESHOOTING TECHNIQUES:
 A. CONSOLE OP
 B. MAVEN & JAVA
 C. DEPENDENCY MISTAKE 
-D. CPU & MEMEORY
+D. CPU & MEMORY
 
 2. JOB LEVEL:
 A. REPO AND BRANCH CONFIG
