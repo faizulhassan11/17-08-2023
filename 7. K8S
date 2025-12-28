@@ -35,7 +35,7 @@ We have 4 components in the master node.
 
 COMPONENTS:
 MASTER NODE:
-1. API SERVER: It's for communicating with the cluster, it takes commands, executes and gives output.
+1. API SERVER: It's for communicating with the cluster; it takes commands, executes, and gives output.
 2. ETCD: it's a DB of a cluster, and all the cluster info will be stored here.
 3. SCHEDULER: schedules pods on worker nodes, based on hardware resources.
 4. CONTROLLER: used to control the k8s objects.
@@ -107,14 +107,14 @@ K8's cannot communicate with containers; they can communicate with only pods.
 2. Declarative (Manifest file)
 
 
-IMPERATIVE: 
-kubectl run pod1 --image rahamshaik/paytmtrain: latest
-kubectl get po/pod/pods
-kubectl get po/pod/pods -o wide
-kubectl describe pod pod1
-kubectl delete pod pod1
+IMPERATIVE: Creating a pod using the command 
+kubectl run pod1 --image rahamshaik/paytmtrain: latest  --> to create the pod
+kubectl get po/pod/pods   --> to list the pod
+kubectl get po/pod/pods -o wide  --> to get additional information of the pod
+kubectl describe pod pod1    --> to get details of the pod
+kubectl delete pod pod1      --> to delete the pod
 
-Declarative:
+Declarative: creating a pod with a file
 vim abc.yml
 
 apiVersion: v1
@@ -126,11 +126,59 @@ spec:
     - image: nginx
       name: cont1
 
-kubectl create -f abc.yml
+kubectl create -f abc.yml  --> to create the pod
 kubectl get po/pod/pods
 kubectl get po/pod/pods -o wide
 kubectl describe pod pod1
 kubectl delete pod pod1
+
+HISTORY:
+  1  apt update -y
+    2  apt upgrade -y
+    3  sudo apt install curl wget apt-transport-https -y
+    4  sudo curl -fsSL https://get.docker.com -o get-docker.sh
+    5  ll
+    6  sh get-docker.sh
+    7  sudo curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    8  ll
+    9  sudo mv minikube-linux-amd64 /usr/local/bin/minikube
+   10  chmod +x /usr/local/bin/minikube
+   11  minikube version
+   12  sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux                                                                                                                                                           /amd64/kubectl"
+   13  ll
+   14  sudo curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/k                                                                                                                                                           ubectl.sha256"
+   15  echo "$(cat kubectl.sha256) kubectl" | sha256sum --check
+   16  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+   17  kubectl version
+   18  kubectl version --client
+   19  minikube start --driver=docker --force
+   20  minikube status
+   21  kubectl get pod
+   22  kubectl get pods
+   23  kubectl get po
+   24  kubectl run pod1 --image rahamshaik/paytmtrain:latest
+   25  kubectl get pod
+   26  kubectl get pods
+   27  kubectl get po
+   28  kubectl describe pod pod1
+   29  kubectl get po
+   30  kubectl delete pod pod1
+   31  kubectl get po
+   32  kubectl run pod1 --image ubuntu
+   33  kubectl get po
+   34  kubectl delete pod pod1
+   35  kubectl run raham --image nginx
+   36  kubectl get po
+   37  kubectl describe pod raham
+   38  kubectl get po -o wide
+   39  kubectl delete pod raham
+   40  vim abc.yml
+   41  kubectl create -f abc.yml
+   42  kubectl get po
+   43  kubectl get po -o wide
+   44  kubectl describe pod pod1
+   45  kubectl delete pod pod1
+   46  history
 
 
 DRAWBACK:
@@ -144,7 +192,7 @@ If we delete one pod, it will be created automatically.
 We can distribute the load also.
 
 
-LABEL: assigning to a pod for identification. to work with them as a single unit.
+LABEL: assigning to a pod for identification, to work with them as a single unit.
 SELECTOR: used to identify the pod with the same label.
 
 kubectl api-resources
@@ -191,8 +239,10 @@ kubectl scale rs/swiggy-rs --replicas=5
 
 SCALING FOLLOWS LIFO PATTERN:
 LIFO: LAST IN FIRST OUT
-The pod which is created will be deleted first automatically when we scale out.
+The pod that is created will be deleted automatically when we scale out.
 
+Limitations for replicaset:
+can not update the image
 
 DEPLOYMENT:
 It will do all operations linked to RS.
@@ -228,6 +278,8 @@ kubectl edit deploy/swiggy-rs
 kubectl delete deploy swiggy-r
 kubectl delete po --all
 
+Rolling Update Strategy:
+When we update the image in the deploy, it first deletes previous pods and creates new pods
 
 KUBECOLOR:
 
@@ -328,53 +380,6 @@ HISTORY:
 root@ip-172-31-10-159:~#
 
 
-HISTORY:
-  1  apt update -y
-    2  apt upgrade -y
-    3  sudo apt install curl wget apt-transport-https -y
-    4  sudo curl -fsSL https://get.docker.com -o get-docker.sh
-    5  ll
-    6  sh get-docker.sh
-    7  sudo curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-    8  ll
-    9  sudo mv minikube-linux-amd64 /usr/local/bin/minikube
-   10  chmod +x /usr/local/bin/minikube
-   11  minikube version
-   12  sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux                                                                                                                                                           /amd64/kubectl"
-   13  ll
-   14  sudo curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/k                                                                                                                                                           ubectl.sha256"
-   15  echo "$(cat kubectl.sha256) kubectl" | sha256sum --check
-   16  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-   17  kubectl version
-   18  kubectl version --client
-   19  minikube start --driver=docker --force
-   20  minikube status
-   21  kubectl get pod
-   22  kubectl get pods
-   23  kubectl get po
-   24  kubectl run pod1 --image rahamshaik/paytmtrain:latest
-   25  kubectl get pod
-   26  kubectl get pods
-   27  kubectl get po
-   28  kubectl describe pod pod1
-   29  kubectl get po
-   30  kubectl delete pod pod1
-   31  kubectl get po
-   32  kubectl run pod1 --image ubuntu
-   33  kubectl get po
-   34  kubectl delete pod pod1
-   35  kubectl run raham --image nginx
-   36  kubectl get po
-   37  kubectl describe pod raham
-   38  kubectl get po -o wide
-   39  kubectl delete pod raham
-   40  vim abc.yml
-   41  kubectl create -f abc.yml
-   42  kubectl get po
-   43  kubectl get po -o wide
-   44  kubectl describe pod pod1
-   45  kubectl delete pod pod1
-   46  history
 ===========================================================
 KOPS:
 INFRASTRUCTURE: Resources used to run our application on the cloud.
@@ -472,7 +477,7 @@ HISTORY:
    21  kops update cluster --name rahams.k8s.local --yes --admin
    22  kops validate cluster --wait 10m
    23  kops get cluster
-   24  kubectl get no
+   24  kubectl get no                  --> to get nodes information
    25  kops edit ig --name=rahams.k8s.local nodes-us-east-1a
    26  kops update cluster --name rahams.k8s.local --yes --admin
    27  kops rolling-update cluster --yes
@@ -511,7 +516,7 @@ we cant access the objects from one namespace to another namespace.
 TYPES:
 
 default          : Is the default namespace; all objects will be created here. Only
-kube-node-lease : it will store objects which are taken from one namespace to another.
+kube-node-lease : it will store objects that are taken from one namespace to another.
 kube-public: all the public objects will store here.      
 kube-system: default k8s will create some objects, which are stored in this namespace.
 
@@ -522,6 +527,7 @@ kubectl get po -A		: to list all pods in all namespaces
 
 kubectl create ns dev	: to create a namespace
 kubectl config set-context --current --namespace=dev : to switch to the namespace
+kubectl config view  | grep namespace: to see the current namespace
 kubectl config view --minify | grep namespace: to see current namespace
 kubectl delete ns dev	: to delete namespace
 kubectl delete pod --all: to delete all pods
@@ -573,9 +579,9 @@ spec:
     - port: 80
 
 DRAWBACK:
-We cannot use app outside.
+We cannot use the app outside.
 
-2. NODEPORT: It will expose our application in a particular port.
+2. NODEPORT: It will expose our application on a particular port.
 Range: 30000 - 32767 (in sg we need to give all traffic)
 
 apiVersion: apps/v1
@@ -724,7 +730,7 @@ HISTORY:
    65  kubectl create -f abc.yml
    66  kubectl get deploy,svc
    67  vim abc.yml
-   68  kubectl apply -f abc.yml
+   68  kubectl apply -f abc.yml    --> to update 
    69  kubectl delete -f abc.yml
    70  vim abc.yml
    71  kubectl create -f abc.yml
