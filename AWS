@@ -39,3 +39,29 @@ When we stop the server, it will bring the following changes:
 1. Public ip will change
 2. Services will be stopped
 3. Charges will be applied to the ebs volume only.
+
+===========================================================================================
+
+Elastic load balancer
+
+
+Users (Internet)
+      |
+Internet Load Balancer
+      |
+Web Servers (EC2)
+      |
+Internal Load Balancer
+      |
+App Servers (EC2)
+      |
+Database Server
+
+
+
+internet load balancer -> web server -> internal load balancer ->  app server -> DB server
+
+
+Difference between 
+internet load balancer <> internal load balancer
+
