@@ -764,5 +764,16 @@ pipeline {
                     war: 'target/*.war'
             }
         }
+
+If we want to restart jenkins make sure no jobs are running
+
+Jenkins backup plugin
+
+1. thin backup
+2. periodic backup
+
+periodic backup manager --> config --> temporary directory--> backup schdule --> max backup --> 
+store day --> full backup --> storage stategy --> tarGz storage --> backup location --> /tmp
+enable this location  --> validate path --> save
     }
 }
