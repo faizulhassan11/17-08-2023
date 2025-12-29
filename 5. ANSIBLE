@@ -968,3 +968,40 @@ HISTORY:
   346  vim tomcat.yml 
   347  ansible-playbook tomcat.yml 
   348  history
+
+===========================================
+
+CREATING EC2 FROM PLAYBOOK
+
+NOTE: If Ansible wants to create an ec2 instance in the cloud, it needs to have permission
+So, to allocate the permission for our Ansible, we can create an IAM user
+
+IAM --> create user --> name: Ansible --> next --> Attach policies directly-->
+ec2fullAccess --> next --> create user
+
+Ansible --> Security Credentials --> Create access key --> CLI --> checkbox --> create acces key -->
+download .csv file
+
+COME TO ANSIBLE SERVER:
+aws configure --> giving ansible user permissions to the server
+
+AWS Access Key ID [None]: xxxxxxxxxxxx
+AWS Secret Access Key [None]: xxxxxxxxxxxx
+Default region name [None]: us-east-1
+Default output format [None]: table
+
+sudo pip install boto   --> without installing this, we can not able to create ec2 instance
+
+- hosts: localhost
+  tasks:
+	- name: create ec2 instance
+	  ec2:
+		region: "us-east-1"
+		count: 3
+		image: "ami-04ff8ccbfa41c9ad"
+		instance_type: "t2.micro"
+		instance_tags: 
+		   Name: "abc-server"
+
+
+
