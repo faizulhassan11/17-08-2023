@@ -1,3 +1,5 @@
+GIT
+
 What is git & why do we need to use it?
 Difference btw distributed and a centralized version control system?
 what is rollback & how to do rollback?
@@ -19,8 +21,6 @@ Explain branches?
 merge conflict & how to resolve?
 
 
-
-
 ========================================================================================
 
 MAVEN
@@ -32,7 +32,6 @@ what is maven Homepath
 Explain maven lifecycle
 what is a Goal and how it will work
 what is the diggerence btw maven & ant
-
 
 ============================================================================================
 
@@ -53,3 +52,99 @@ types of pipelines & difference btw them
 what is multi-stage pipline
 what is pipeline as a code
 what is input parameter in pipeline
+types of pipelines & difference btw them
+what is multi-stage pipeline
+what is pipeline as a code
+explain about master and slave configuration
+hot to reduce load on jenkins server
+what is build executors
+what is agent in jenkins master & slave
+what is label in jenkins
+explain parameters in jenkins
+what is jenkinsfile
+how to run multiple builds at same time in jenkins
+waht is variables in jenkins and how many types
+
+=====================================================================================================
+NEXUS
+what is nexus and explain about it
+what is Tomcat and explain about it
+Path to deploy war & jar files in tomcat
+how to restrict users in jenkins
+explain jenkins deployment process
+
+ 
+======================================================================================================
+ANSIBLE
+what is ansible
+explain ansible architecture
+what is ansible inventory file
+types of ansible inventory file
+how to establish connection btw ansible and worker nodes
+waht is agent less
+wat is adhoc commands
+what is a module
+explain any few modules you know
+how to execute multiple modules
+what is a playbook
+what is a yaml and explain it
+what is gather facts in ansible
+what is a task in ansible
+command to run playbook
+how to run playbook
+how to skip errors in playbook
+what is tags in playbook
+explain  varibales in playbook
+what is ansible conditions
+what is handlers in playbook
+why to use llops in playbook
+what is lamp stack
+how to get complete info of worker node
+what is debug module
+what is lookup module
+what is in-line module ? (to change a specific line of a file in worker node)
+what is jinja2 template
+explain ansible vault
+explain ansible roles
+explain ansible galaxy
+explain ansible pip module
+what is shell, command, raw module
+how to restrict the task for specific time in playbook
+what is ansible tower
+
+=================================================================================================
+DOCKER
+what is monolithic & micro services
+limitations of monolithic
+what is a container
+what is a docker image
+what is containerization
+explain docker architecture & components of docker
+what is docker daemon
+how to download docker image
+how to create container
+what is os-level of virtualization
+what is dockerfile and why to use it
+explain dockerfile components
+what is difference btw run vs cmd
+what is difference btw entrypoint vs cmd
+what is difference btw copy vs add
+what is difference btw env vs args
+how to run the dockerfile
+what is a docker volume
+what is docker voume mounting
+homepath for docker components
+what is a layer in image
+how to allocate cpu & ram for  containers
+what is compose and why to use it
+
+
+
+
+
+
+
+
+
+
+
