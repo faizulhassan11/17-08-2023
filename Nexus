@@ -1,8 +1,100 @@
 NEXUS:
 
-1 cpu and 2 gb of ram
-22 and 8081 port
-Openjdk8
+It's an artifactory storage service.
+used to store artifacts on the rep. (.JAR, .WAR,.EAR)
+Nexus server --> Repo --> Artifact
+We can use this server to rollback in real time.
+It requires t2.medium  1 cpu and 2 gb of RAM
+Nexus uses Java 1.8.0
+PORT: 8081
+
+ALTERNATIVES: JFROPG, S3, -----
+
+SETUP SCRIPT:
+https://github.com/RAHAMSHAIK007/all-setups.git
+
+STEPS: signin --> username: admin & password: /app/sonartype-work/nexus3/admin.password --> next --> set password --> 
+disable anonymous access --> save
+
+CREATING REPO:
+settings symbol --> repositories --> new --> maven2(hosted) --> name --> save
+
+NOTE: To integrate any tool with jenkins we need to download the plugin.
+
+NEXUS INTEGERATION TO PIPELINE:
+1. Download the plugin (Nexus Artifact Uploader)
+Manage Jenkins --> plugins --> Available Plugins --> Nexus Artifact Uploader --> install
+
+2. Configure it to pipeline by using pipeline syntax.
+
+NOTE: All the information will be available on pom.xml file.
+
+PIPELINE:
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/devopsbyraham/jenkins-java-project.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Code Quality') {
+            steps {
+                sh '''
+                mvn sonar:sonar \
+                -Dsonar.projectKey=netflix \
+                -Dsonar.host.url=http://13.38.32.159:9000 \
+                -Dsonar.login=SONAR_TOKEN
+                '''
+            }
+        }
+
+        stage('Package Artifact') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Artifact Upload to Nexus') {
+            steps {
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: '13.38.32.159:8081',
+                    groupId: 'com.netflix',
+                    version: '1.0',
+                    repository: 'maven-releases',
+                    credentialsId: 'nexus-creds',
+                    artifacts: [
+                        [
+                            artifactId: 'netflix',
+                            classifier: '',
+                            file: 'target/netflix.war',
+                            type: 'war'
+                        ]
+                    ]
+                )
+            }
+        }
+    }
+}
+
+
 
 NEXUS SETUP:
 
