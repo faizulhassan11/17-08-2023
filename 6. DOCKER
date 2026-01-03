@@ -1,5 +1,27 @@
+APPLICATION: Collection of services
+
 MONOLITHIC: SINGLE APP -- > SINGLE SERVER -- > SINGLE DATABASE
+MONOLITHIC: multiple services are deployed on a single server with a single database
+
 MICRO SERVICES: SINGLE APP -- > MULTIPLE SERVERS -- > MULTIPLE DATABASES
+MICRO SERVICES: multiple services are deployed on multiple servers with multiple databases
+
+Based on users and app complexity, we need to select the architecture
+
+Factors affecting for using micro services
+F-1: Cost
+F-2: Maintainance
+
+
+monolithic:
+If an application contains N number of services (let's take paytm has money transactions, movie tickets, train tickets
+, etc.) if all these services are included in one server, then it will be called a monolithic architecture. Every monolithic
+Architecture has only one database for all the services.
+
+Micro services:
+If an application contains N number of services (let's take paytm has money transactions, movie tickets, train tickets, etc.),
+if every service has its own individual servers, then it is called microservices. Every microservices architecture
+has its own database for each service.
 
 MICRO:
 COST WILL BE HIGH
@@ -59,10 +81,12 @@ Current Best Practice: Containers on Cloud with Orchestration (e.g., Kubernetes 
 
 CONTAINERS:
 SERVER = CONTAINER
-
+Its same as a server/VM
 Containers will not have os by default.
+(Server=AMI, Container=IMAGE)
 can't install packages,
 can't deploy the app.
+Its free of cost and can create multiple containers
 
 Docker Image = Recipe Book
 
@@ -95,17 +119,19 @@ We can create, run, and deploy our apps on containers.
 It's platform independent (native runs on Linux distributions).
 containers will use host resources (CPU, mem, ram, os)
 Docker will perform an OS-level of VIRTUALISATION called containerization.
-
 year: 2013
 developed by: Solomon Hykes and Sebastian Phal
 language: go lang
+We write files on yaml
+before docker user faced a lot of problems, but after docker there are no issues with the application.
 
 
 ARCHITECTURE:
-DOCKER CLIENT: it's a way of interacting with Docker (command -> op)
-DOCKER DAEMON: it manages all the Docker components (images, containers, volumes, networks)
-DOCKER HOST: where we installed Docker
-DOCKER REGISTRY: It manages all Docker images on the internet.
+CLIENT: It's a way of interacting with Docker (command -> op)
+user gives commands, and it will be executed by docker client
+DAEMON: it manages all the Docker components (images, containers, volumes, networks)
+HOST: Where we installed Docker (ex: Linux, Windows, macOS)
+REGISTRY: It manages all Docker images on the internet.
 
 
 INSTALLATION:
@@ -115,7 +141,10 @@ systemctl status docker
 
 
 docker pull amazonlinux: to download the image
+docker images: to see the list of images
 docker run -it --name cont1 amazonlinux : to create conatiner
+-it (interactive) - to go inside a container
+cat/
 
 yum install git -y
 yum install maven -y
@@ -129,6 +158,16 @@ docker stop cont1	: to stop cont1
 docker kill cont1	: to stop immedieatly cont1
 docker ps: to see running containers
 docker ps -a: to see all containers
+docker attach cont_name : to go inside container
+docker pause cont_name : to pause container
+docker unpause cont_name : to unpause container
+docker inspect cont_name : to get complete info of a container
+docker rm cont_name : to delete a container
+
+STOP : will wait to finish all processes running inside container
+KILL : will wait to finish all processes running inside the container
+
+cat /etc/os-release  --> to see os flavour
 
 HISTORY:
   1  yum install docker -y 
@@ -166,7 +205,7 @@ Without running apt update -y, we can't install packages
 
 WORKING:
 docker pull ubuntu
-docker run -it --name cont1 ubuntu
+docker run -it --name cont1 ubuntu 
 apt update -y
 apt install git maven apache2 tree -y
 touch file{1..5}
@@ -178,18 +217,24 @@ Check version now
 
 
 DOCKERFILE:
-It's a way of creating images automatically.
+It's  a way of creating images automatically.
 We can reuse the Docker file multiple times.
 In Dockerfile, D will always be capitalised.
 Components inside the Dockerfile are also capitalised.
+Here, we can create an image directly without the container's help
+Name = Dockerfile
+
+docker kill $(docker ps -qa)
+docker rm $(docker ps -qa)
+docker rmi $(docker images -qa)
 
 Dockerfile -- > Image -- > Container -- > 
 
 
 COMPONENTS:
-FROM: to base image (gives os)
-RUN: to execute Linux commands (image creation)
-CMD: to execute Linux commands (container creation)
+FROM: used to base image (gives os)
+RUN: used to execute Linux commands (image creation)
+CMD: used to execute Linux commands (container creation)
 ENTRYPOINT: higher priority than cmd
 COPY: to copy local files to the container
 ADD: to copy Internet files to the container
@@ -273,6 +318,36 @@ ENV client Swiggy
 VOLUME ["/volume1"]
 EXPOSE 8080
 
+Netflix-DEPLOYMENT
+ yum install git -y
+git clone https://github.com/RAHAMSHAIK007/netflix-clone.git
+mv netflix-clone/*
+
+Dockerfile
+
+FROM ubuntu
+RUN apt update
+RUN apt install apache2 -y
+COPY * /var/www/html/
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+
+docker build -t netflix:v1 .
+docker run -it --name netflix1 -p 80:80 netflix:v1
+
+MULTI-STAGE BUILD:
+If we build image-1 from docker file and use that image-1 to build another image.
+
+Dockerfile --> image1
+
+Dockerfile
+FROM image1  --> multi-stage build
+-----------
+----------
+
+ADV:
+less time
+less work
+less complexity
 COMMANDS:
 docker ps -a -q: to list container IDs
 docker stop $(docker ps -a -q) : to stop all conatiners
@@ -341,9 +416,12 @@ Volume is essentially a folder within a container.
 We can share a volume from one container to another.
 The volume contains files with data.
 We can attach a single volume to multiple containers.
+ex: cont-1 (vol1)  --> cont-2 (vol1) & cont-3 (vol1) & cont-4 (vol1)
 But at a time, we can attach only one volume to one container.
 volumes are decoupled (loosely attached)
 If we delete the container volume will not be deleted.
+Every volume will be stored under /var/lib/docker/volumes
+
 
 
 METHOD-1:
@@ -357,6 +435,7 @@ docker build -t netflix:v1.
 docker run -it --name cont1 netflix:v1
 cd volume1
 touch file{1..10}
+cat>file1
 ctrl p q
 
 docker run -it --name cont2 --volumes-from cont1 --privileged=true ubuntu
