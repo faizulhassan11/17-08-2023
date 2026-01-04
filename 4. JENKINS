@@ -165,7 +165,7 @@ CRONJOB: used to schedule the works on jenkins.
 cron synatx is used to work with cron jobs.
 cron synatx: * * * * *
 each star will have space in b/w
-NOTE: use server time (utc)
+NOTE: Use server time (utc)
 
 *	: minutes
 *	: hours
@@ -220,9 +220,10 @@ communication blw master and slave is ssh.
 Here we need to install the agent (java-11).
 slave can use any platform.
 label = a way of assigning work for a slave.
+slave means ec2 instance
 
 SETUP:
-#STEP-1 : Create a server and install java-11
+#STEP-1: Create a server and install java-11
 amazon-linux-extras install java-openjdk11 -y
 
 #STEP-2: SETUP THE SLAVE SERVER
@@ -231,10 +232,10 @@ Dashboard -- > Manage Jenkins -- > Nodes & Clouds -- > New node -- > nodename: a
 CONFIGURATION OF SALVE:
 
 Number of executors : 3 #Number of Parallel builds
-Remote root directory : /tmp #The place where our output is stored on the slave server.
-Labels : swiggy #place the op in a particular slave
-useage: last option
-Launch method : last option 
+Remote root directory: /tmp #The place where our output is stored on the slave server.
+Labels: swiggy #place the op in a particular slave
+usage: last option
+Launch method: last option 
 Host: (your privte ip)
 Credentials -- > add -- >jenkins -- > Kind : ssh username with privatekey -- > username: ec2-user 
 privatekey : pemfile of server -- > save -- > 
@@ -242,13 +243,23 @@ Host Key Verification Strategy: last option
 
 DASHBOARD -- > JOB -- > CONFIGURE -- > RESTRTICT WHERE THIS JOB RUN -- > LABEL: SLAVE1 -- > SAVE
 
+BUILD FAILS --> WHY --> WE NEED TO INSTALL PACKAGES
+yum install git java-1.8.0-openjdk maven -y
+
+TO EXECUTE ON SLAVE
+
+pipeline {
+    agent {
+        label 'slave1'
+    } 
+
 
 
 LINKED JOBS: 
 here jobs are linked with each other.
 types:
-1. Up stream
-2. Down stream
+1. Upstream
+2. Downstream
 
 create a job2
 job1 -- > configuration -- > post build actions -- > build other projects -- > name of job2 -- > save
@@ -473,10 +484,10 @@ pipeline {
 
 
 SONARQUBE:
-its a tool used to check the code quality.
-it covers the bugs, vulnerabilities, code duplications, code smells.
-its supports 20+ programming langauges.
-we have both free and paid version.
+Its a tool used to check the code quality.
+It covers the bugs, vulnerabilities, code duplications, and code smells.
+It supports 20+ programming languages.
+We have both free and paid versions.
 
 port: 9000
 req: t2 medium
@@ -495,13 +506,13 @@ chown sonar:sonar sonarqube-8.9.6.50800 -R
 chmod 777 sonarqube-8.9.6.50800 -R
 su - sonar
 
-#run this on server manually
+#run this on the server manually
 #sh /opt/sonarqube-8.9.6.50800/bin/linux/sonar.sh start
 #echo "user=admin & password=admin"
 
 after login -- > add project -- > manual -- > project key -- > netlfix -- > setup -- > token -- > netflix -- > generate -- > continue -- > maven 
 
-copy paste the code on pipeline:
+Copy-paste the code into the pipeline:
 
 pipeline {
     agent any 
@@ -540,12 +551,104 @@ pipeline {
     }
 }
 
-TO EXCECUTE ON SLAVE
+NEXUS:
 
+It's an artifactory storage service.
+used to store artifacts on the rep. (.JAR, .WAR,.EAR)
+Nexus server --> Repo --> Artifact
+We can use this server to rollback in real time.
+It requires t2.medium  1 cpu and 2 gb of RAM
+Nexus uses Java 1.8.0
+PORT: 8081
+
+ALTERNATIVES: JFROPG, S3, -----
+
+SETUP SCRIPT:
+https://github.com/RAHAMSHAIK007/all-setups.git
+
+STEPS: signin --> username: admin & password: /app/sonartype-work/nexus3/admin.password --> next --> set password --> 
+disable anonymous access --> save
+
+CREATING REPO:
+settings symbol --> repositories --> new --> maven2(hosted) --> name --> save
+
+NOTE: To integrate any tool with jenkins we need to download the plugin.
+
+NEXUS INTEGERATION TO PIPELINE:
+1. Download the plugin (Nexus Artifact Uploader)
+Manage Jenkins --> plugins --> Available Plugins --> Nexus Artifact Uploader --> install
+
+2. Configure it to pipeline by using pipeline syntax.
+
+NOTE: All the information will be available on pom.xml file.
+
+PIPELINE:
 pipeline {
-    agent {
-        label 'slave1'
-    } 
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/devopsbyraham/jenkins-java-project.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Code Quality') {
+            steps {
+                sh '''
+                mvn sonar:sonar \
+                -Dsonar.projectKey=netflix \
+                -Dsonar.host.url=http://13.38.32.159:9000 \
+                -Dsonar.login=SONAR_TOKEN
+                '''
+            }
+        }
+
+        stage('Package Artifact') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Artifact Upload to Nexus') {
+            steps {
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: '13.38.32.159:8081',
+                    groupId: 'com.netflix',
+                    version: '1.0',
+                    repository: 'maven-releases',
+                    credentialsId: 'nexus-creds',
+                    artifacts: [
+                        [
+                            artifactId: 'netflix',
+                            classifier: '',
+                            file: 'target/netflix.war',
+                            type: 'war'
+                        ]
+                    ]
+                )
+            }
+        }
+    }
+}
+
+
+
     
 ===================================================================================
 12-09-2023:
@@ -589,7 +692,7 @@ print env: gives all env vars of Jenkins
 Their vars are going to change as per build.
 
 find / -name jenkins.service
-Find command is used to find the path of a file.
+The find command is used to find the path of a file.
 
 HOW TO PASS VARIABLES ON PIPELINE:
 
@@ -666,24 +769,40 @@ role2: exp -- > admin
 ASSIGN ROLES
 
 --------------------------------------------------------------
+TOMCAT
+
+WEBSITE: FRONTEND --> DB IS OPT
+WEBAPP: FRONTEND + BACKEND  --> DB IS MANDATORY
+
+its a web application server used to deploy Java applications.
+agent: java-11
+PORT: 8080
+We can deploy our artifacts.
+its free and opensource
+it is written on java language.
+year: 1999
+
+war: tomcat/webapps
+jar: tomcat/lib
+
+ALTERNATIVES: NGINX, IIS, WEBSPHERE, JBOSS, GLASSFISH
 
 TOMCAT SETUP:
-1. wget http://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
-2. tar -zxvf apache-tomcat-9.0.80.tar.gz
-3. vim apache-tomcat-9.0.80/conf/tomcat-users.xml
+STEP-1. wget http://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
+STEP-2. tar -zxvf apache-tomcat-9.0.80.tar.gz
+STEP-3. vim apache-tomcat-9.0.80/conf/tomcat-users.xml
 
   <role rolename="manager-gui"/>
   <role rolename="manager-script"/>
   <user username="tomcat" password="raham123" roles="manager-gui, manager-script"/>
 
-4. vim apache-tomcat-9.0.80/webapps/manager/META-INF/context.xml (delete 21,22)
-5. sh apache-tomcat-9.0.80/bin/startup.sh
+STEP-4. vim apache-tomcat-9.0.80/webapps/manager/META-INF/context.xml (delete 21,22)
+STEP-5. sh apache-tomcat-9.0.80/bin/startup.sh
 
 public-ip slave:8080
 manager app -- > usrername and passowd
 
-Download plugin -- > Deploy to container : this is to deploy on tomcat
-
+Download plugin -- > Deploy to container: this is to deploy on Tomcat
 
 Dashboard
 Manage Jenkins
@@ -710,10 +829,21 @@ A. REPO AND BRANCH CONFIG
 B. SYNTAX
 C. PLUGINS
 
-
-vim /root/apache-tomcat-9.0.80/conf/server.xml
-sh /root/apache-tomcat-9.0.80/bin/startup.sh
+REAL SCENARIOS:
+port  change:
+vim /root/apache-tomcat-9.0.80/conf/server.xml (line 69)
 sh /root/apache-tomcat-9.0.80/bin/shutdown.sh
+sh /root/apache-tomcat-9.0.80/bin/startup.sh
+
+
+PASSWORD:
+vim /root/apache-tomcat-9.0.80/conf/tomcat-user.xml
+sh /root/apache-tomcat-9.0.80/bin/shutdown.sh
+sh /root/apache-tomcat-9.0.80/bin/startup.sh
+
+LOGS:
+tail -f apache-tomcat-9.0.90/logs/localhost_access_log.2024-06-24.txt
+NOTE: The log file will change as per the date.
 
 pipeline {
     agent {
@@ -777,3 +907,15 @@ store day --> full backup --> storage stategy --> tarGz storage --> backup locat
 enable this location  --> validate path --> save
     }
 }
+
+
+
+BLUE OCEAN: to enhance the jenkins dashboard.
+
+Dashboard -- > Manage Jenkins -- > Plugins -- > Available plugins -- > Blue Ocean -- > select -- > install -- > Go back to the top page -- > 
+ 
+
+
+LIST VIEW: to make a list of all jobs as per my req.
+MY VIEW: to see all the jobs that I can access.
+
