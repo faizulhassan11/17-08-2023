@@ -804,11 +804,7 @@ manager app -- > usrername and passowd
 
 Download plugin -- > Deploy to container: this is to deploy on Tomcat
 
-Dashboard
-Manage Jenkins
-Credentials
-System
-Global credentials (unrestricted)
+Dashboard -> Manage Jenkins -> Credentials -> System -> Global credentials (unrestricted) -> 
 add credentials -- > username and password -- > save
 
 http://13.39.49.204:8080/netflix/
