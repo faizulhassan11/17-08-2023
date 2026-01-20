@@ -8,7 +8,7 @@ MICRO SERVICES: multiple services are deployed on multiple servers with multiple
 
 Based on users and app complexity, we need to select the architecture
 
-Factors affecting for using micro services
+Factors affecting the use of micro services
 F-1: Cost
 F-2: Maintainance
 
@@ -694,9 +694,10 @@ Docker Swarm is a container orchestration tool.
 It is used to manage multiple containers on multiple nodes.
 Each node will have a copy of a single container.
 Here we have manager and worker nodes.
-The manager node will create containers and send them to the worker nodes.
+The manager node creates containers and sends them to the worker nodes.
 worker nodes will take the container and manage it.
 The manager node communicates with the worker node by using a token.
+Port = 2377
 
 SETUP:
 1. Create 3 servers (1=manager, 2=worker) (all traffic must)
